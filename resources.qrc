@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="main">
+    <file>img/battery.png</file>
+    <file>img/fan.png</file>
+    <file>img/headlight.png</file>
+    <file>img/dome.png</file>
+  </qresource>
+</RCC>
