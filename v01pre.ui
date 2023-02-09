@@ -617,7 +617,7 @@ border-color: rgb(220, 138, 221);</string>
     <property name="font">
      <font>
       <family>Open Sans</family>
-      <pointsize>18</pointsize>
+      <pointsize>-1</pointsize>
       <weight>63</weight>
       <italic>false</italic>
       <bold>true</bold>
@@ -626,7 +626,7 @@ border-color: rgb(220, 138, 221);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);
-font: 500 18pt &quot;Open Sans&quot;;</string>
+font: 500 22px &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
      <string>INTERNAL TEMP</string>
