@@ -759,7 +759,7 @@ color: rgb(153, 193, 241);</string>
      <rect>
       <x>70</x>
       <y>460</y>
-      <width>161</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -786,7 +786,7 @@ color: rgb(143, 240, 164, 0.3);</string>
      <rect>
       <x>70</x>
       <y>410</y>
-      <width>161</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -813,7 +813,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <rect>
       <x>70</x>
       <y>360</y>
-      <width>171</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -840,7 +840,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <rect>
       <x>70</x>
       <y>310</y>
-      <width>171</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -867,7 +867,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <rect>
       <x>70</x>
       <y>260</y>
-      <width>171</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
