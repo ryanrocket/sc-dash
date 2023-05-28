@@ -387,14 +387,14 @@ color: rgb(255, 255, 255);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>30</pointsize>
-      <weight>38</weight>
+      <weight>63</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 300 30pt &quot;Open Sans&quot;;
+     <string notr="true">font: 500 30pt &quot;Open Sans&quot;;
 color: red;</string>
     </property>
     <property name="text">
@@ -1108,7 +1108,7 @@ font: 800 34pt &quot;Open Sans&quot;;</string>
      <rect>
       <x>930</x>
       <y>550</y>
-      <width>351</width>
+      <width>411</width>
       <height>31</height>
      </rect>
     </property>
@@ -1117,7 +1117,7 @@ font: 800 34pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255, 0.5);
-font: 300 16pt &quot;Ubuntu&quot;;</string>
+font: 600 16pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="value">
      <number>20</number>
@@ -1803,14 +1803,14 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -1830,14 +1830,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -1857,14 +1857,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -1884,14 +1884,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -1911,14 +1911,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -1938,14 +1938,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -1965,14 +1965,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
