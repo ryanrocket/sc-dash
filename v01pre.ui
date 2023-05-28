@@ -578,6 +578,9 @@ border-color: rgb(220, 138, 221);</string>
     <property name="text">
      <string>DATA TOGGLE</string>
     </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
@@ -1103,26 +1106,6 @@ font: 800 34pt &quot;Open Sans&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QProgressBar" name="data_battery_level">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>550</y>
-      <width>411</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255, 0.5);
-font: 600 16pt &quot;Ubuntu&quot;;</string>
-    </property>
-    <property name="value">
-     <number>20</number>
-    </property>
-   </widget>
    <widget class="QLabel" name="overheat_warn">
     <property name="geometry">
      <rect>
@@ -1358,60 +1341,6 @@ color: rgb(255, 120, 0, 0.2);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>520</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>BATTERY VOLT</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>590</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>LOAD DRAW</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
@@ -1634,357 +1563,6 @@ color: rgb(98, 160, 234, 0.2);</string>
      <string>SYSTEM MESSAGE</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>520</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>SOLAR VOLT</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_13">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>590</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>SOLAR DRAW</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_14">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>520</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>NET FLOW</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>590</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>ACC. DRAW</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_17">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>520</y>
-      <width>311</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>EST. BATTERY LEVEL</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_18">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>590</y>
-      <width>311</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>18</pointsize>
-      <weight>38</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 300 18pt &quot;Open Sans&quot;;</string>
-    </property>
-    <property name="text">
-     <string>EST. BATTERY RANGE</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_battery_volt">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>550</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>00.00 V</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_battery_draw">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>620</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>000.00 A</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_solar_volt">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>550</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>00.00 V</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_solar_draw">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>620</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>000.00 A</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_flow">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>550</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>NO DATA</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_acc_draw">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>620</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>000.00 A</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="data_battery_range">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>620</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Open Sans</family>
-      <pointsize>28</pointsize>
-      <weight>75</weight>
-      <italic>false</italic>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
-color: rgb(153, 193, 241);</string>
-    </property>
-    <property name="text">
-     <string>NO DATA</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="ts_right">
     <property name="enabled">
      <bool>false</bool>
@@ -2073,10 +1651,448 @@ color: rgb(153, 193, 241);</string>
      <number>1</number>
     </property>
    </widget>
+   <widget class="QWidget" name="data" native="true">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>520</y>
+      <width>1091</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>BATTERY VOLT</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_battery_volt">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>00.00 V</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>70</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>LOAD DRAW</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_battery_draw">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>100</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>000.00 A</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>70</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>SOLAR DRAW</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_solar_draw">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>100</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>000.00 A</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>0</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>SOLAR VOLT</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_solar_volt">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>00.00 V</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>70</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>ACC. DRAW</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_acc_draw">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>100</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>000.00 A</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>0</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>NET FLOW</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_flow">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>30</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>NO DATA</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>0</y>
+       <width>311</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>EST. BATTERY LEVEL</string>
+     </property>
+    </widget>
+    <widget class="QProgressBar" name="data_battery_level">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>30</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255, 0.5);
+font: 600 16pt &quot;Ubuntu&quot;;</string>
+     </property>
+     <property name="value">
+      <number>20</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>70</y>
+       <width>311</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>18</pointsize>
+       <weight>38</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+     </property>
+     <property name="text">
+      <string>EST. BATTERY RANGE</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="data_battery_range">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>100</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
+color: rgb(153, 193, 241);</string>
+     </property>
+     <property name="text">
+      <string>NO DATA</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources>
   <include location="resources.qrc"/>
  </resources>
  <connections/>
+ <slots>
+  <slot>toggle_data_visibility()</slot>
+ </slots>
 </ui>
