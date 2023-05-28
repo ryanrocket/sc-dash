@@ -638,7 +638,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <rect>
       <x>10</x>
       <y>550</y>
-      <width>101</width>
+      <width>231</width>
       <height>31</height>
      </rect>
     </property>
@@ -646,14 +646,14 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -665,7 +665,7 @@ color: rgb(153, 193, 241);</string>
      <rect>
       <x>10</x>
       <y>620</y>
-      <width>101</width>
+      <width>231</width>
       <height>31</height>
      </rect>
     </property>
@@ -673,14 +673,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>28</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 28pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 28pt &quot;Open Sans&quot;;
 color: rgb(153, 193, 241);</string>
     </property>
     <property name="text">
@@ -741,14 +741,14 @@ color: rgb(153, 193, 241);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>18</pointsize>
-      <weight>38</weight>
+      <weight>63</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 300 18pt &quot;Open Sans&quot;;
+     <string notr="true">font: 500 18pt &quot;Open Sans&quot;;
 color: rgb(143, 240, 164, 0.3);</string>
     </property>
     <property name="text">
@@ -768,15 +768,15 @@ color: rgb(143, 240, 164, 0.3);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>18</pointsize>
-      <weight>38</weight>
+      <weight>63</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(143, 240, 164, 0.3);
-font: 300 18pt &quot;Open Sans&quot;;</string>
+font: 500 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
      <string>EXTERIOR LTS</string>
@@ -795,15 +795,15 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>18</pointsize>
-      <weight>38</weight>
+      <weight>63</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(143, 240, 164, 0.3);
-font: 300 18pt &quot;Open Sans&quot;;</string>
+font: 500 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
      <string>INTERIOR CIRC.</string>
@@ -822,18 +822,18 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>18</pointsize>
-      <weight>38</weight>
+      <weight>63</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(143, 240, 164, 0.3);
-font: 300 18pt &quot;Open Sans&quot;;</string>
+font: 500 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
-     <string>BATTERY CIRC</string>
+     <string>BATTERY CIRC.</string>
     </property>
    </widget>
    <widget class="QLabel" name="bms_stat">
@@ -849,15 +849,15 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>18</pointsize>
-      <weight>38</weight>
+      <weight>63</weight>
       <italic>false</italic>
-      <bold>false</bold>
+      <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(143, 240, 164, 0.3);
-font: 300 18pt &quot;Open Sans&quot;;</string>
+font: 500 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
      <string>BMS ARMED</string>
@@ -1155,7 +1155,7 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
      <rect>
       <x>770</x>
       <y>110</y>
-      <width>171</width>
+      <width>211</width>
       <height>41</height>
      </rect>
     </property>
@@ -1163,14 +1163,14 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(255, 120, 0, 0.2);</string>
     </property>
     <property name="text">
@@ -1182,7 +1182,7 @@ color: rgb(255, 120, 0, 0.2);</string>
      <rect>
       <x>770</x>
       <y>160</y>
-      <width>201</width>
+      <width>211</width>
       <height>41</height>
      </rect>
     </property>
@@ -1190,14 +1190,14 @@ color: rgb(255, 120, 0, 0.2);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(255, 60, 0, 0.2);</string>
     </property>
     <property name="text">
@@ -1209,7 +1209,7 @@ color: rgb(255, 60, 0, 0.2);</string>
      <rect>
       <x>770</x>
       <y>210</y>
-      <width>181</width>
+      <width>211</width>
       <height>41</height>
      </rect>
     </property>
@@ -1217,14 +1217,14 @@ color: rgb(255, 60, 0, 0.2);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(255, 60, 0, 0.2);</string>
     </property>
     <property name="text">
@@ -1317,7 +1317,7 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
      <rect>
       <x>770</x>
       <y>260</y>
-      <width>181</width>
+      <width>211</width>
       <height>41</height>
      </rect>
     </property>
@@ -1325,14 +1325,14 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(255, 120, 0, 0.2);</string>
     </property>
     <property name="text">
@@ -1429,7 +1429,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
+     <string notr="true">color: rgb(154, 153, 150);
 font: 300 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
@@ -1449,15 +1449,15 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>18</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-font: 500 18pt &quot;Open Sans&quot;;</string>
+     <string notr="true">color: rgb(192, 191, 188);
+font: 600 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
      <string>0 MILES</string>
@@ -1525,7 +1525,7 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
      <rect>
       <x>1040</x>
       <y>160</y>
-      <width>281</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
@@ -1533,14 +1533,14 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(255, 60, 0, 0.2);</string>
     </property>
     <property name="text">
@@ -1552,7 +1552,7 @@ color: rgb(255, 60, 0, 0.2);</string>
      <rect>
       <x>1040</x>
       <y>210</y>
-      <width>281</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
@@ -1560,14 +1560,14 @@ color: rgb(255, 60, 0, 0.2);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(255, 60, 0, 0.2);</string>
     </property>
     <property name="text">
@@ -1606,7 +1606,7 @@ color: rgb(98, 160, 234, 0.2);</string>
      <rect>
       <x>1040</x>
       <y>110</y>
-      <width>281</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
@@ -1614,14 +1614,14 @@ color: rgb(98, 160, 234, 0.2);</string>
      <font>
       <family>Open Sans</family>
       <pointsize>22</pointsize>
-      <weight>63</weight>
+      <weight>75</weight>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 500 22pt &quot;Open Sans&quot;;
+     <string notr="true">font: 600 22pt &quot;Open Sans&quot;;
 color: rgb(98, 160, 234, 0.2);</string>
     </property>
     <property name="text">
