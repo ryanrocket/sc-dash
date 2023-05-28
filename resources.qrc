@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="main">
+    <file>img/arrowLeft.png</file>
+    <file>img/arrow.png</file>
     <file>img/battery.png</file>
     <file>img/fan.png</file>
     <file>img/headlight.png</file>
