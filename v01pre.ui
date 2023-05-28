@@ -1151,6 +1151,9 @@ font: 800 30pt &quot;Ubuntu&quot;;</string>
     </property>
    </widget>
    <widget class="QLabel" name="overheat_text">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>770</x>
@@ -1982,10 +1985,13 @@ color: rgb(153, 193, 241);</string>
      <string>NO DATA</string>
     </property>
    </widget>
-   <widget class="QLabel" name="bms_ind_2">
+   <widget class="QLabel" name="ts_right">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>510</x>
       <y>440</y>
       <width>61</width>
       <height>61</height>
@@ -2023,10 +2029,13 @@ color: rgb(153, 193, 241);</string>
      <number>1</number>
     </property>
    </widget>
-   <widget class="QLabel" name="bms_ind_3">
+   <widget class="QLabel" name="ts_left">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>390</x>
       <y>440</y>
       <width>61</width>
       <height>61</height>
