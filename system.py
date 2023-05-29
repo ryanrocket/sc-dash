@@ -5,7 +5,7 @@
 ###########################################################
 
 # Packages
-import sys, time, glob
+import sys, time, glob, datetime
 from w1thermsensor import W1ThermSensor as therm
 
 print("SOLAR CAR DASHBOARD 2023")
@@ -21,7 +21,7 @@ __globals__ = {
             }
         }
     },
-    "start_time": time.time()
+    "start_time": datetime.now()
 }
 
 def log(type, mes):
