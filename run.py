@@ -19,9 +19,14 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi("./v01pre.ui", self)
         print(self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
-        timer = QtCore.QTimer(self)
-        timer.timeout.connect(self.mainEventTrigger)
-        timer.start(1000)
+        # Start slow timer
+        timerSlow = QtCore.QTimer(self)
+        timerSlow.timeout.connect(self.slowEventTrigger)
+        timerSlow.start(5000) 
+        # Start fast timers
+        timerFast = QtCore.QTimer(self)
+        timerFast.timeout.connect(self.fastEventTrigger)
+        timerFast.start(500)
 
     @QtCore.pyqtSlot()
     def toggle_data_visibility(self):
@@ -34,15 +39,17 @@ class MainWindow(QtWidgets.QMainWindow):
             self.data_div.show()
         __state__["data_visible"] = not __state__["data_visible"]
 
-    def mainEventTrigger(self):
-        # Update RTC
-        current_time = QtCore.QTime.currentTime()
-        label_time = current_time.toString('hh:mm:ss')
-        self.time.setText(label_time)
+    def slowEventTrigger(self):
         # Update Temperatures
         temps = read_temperatures()
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
         self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
+
+    def fastEventTrigger(self):
+        # Update RTC
+        current_time = QtCore.QTime.currentTime()
+        label_time = current_time.toString('hh:mm:ss')
+        self.time.setText(label_time)
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
