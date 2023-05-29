@@ -57,7 +57,9 @@ class MainWindow(QtWidgets.QMainWindow):
         label_time = current_time.toString('hh:mm:ss')
         self.time.setText(label_time)
         run_time = (dt.now() - system.__globals__["start_time"])
-        self.runTime.setText(run_time.strftime("%H:%M:%S"))
+        hours, remainder = divmod(run_time, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        self.runTime.setText('{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds)))
 
 
 def main():
