@@ -20,7 +20,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
         timer = QtCore.QTimer(self)
-        timer.timeout.connect(self.getTime)
+        timer.timeout.connect(self.mainEventTrigger)
         timer.start(1000)
 
     @QtCore.pyqtSlot()
@@ -34,7 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.data_div.show()
         __state__["data_visible"] = not __state__["data_visible"]
 
-    def getTime(self):
+    def mainEventTrigger(self):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
         self.time.setText(label_time)

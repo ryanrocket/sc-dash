@@ -6,7 +6,7 @@
 
 # Packages
 import sys, time, glob
-#from w1thermsensor import W1ThermSensor as therm
+from w1thermsensor import W1ThermSensor as therm
 
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
