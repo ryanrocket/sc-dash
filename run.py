@@ -40,6 +40,11 @@ class MainWindow(QtWidgets.QMainWindow):
         __state__["data_visible"] = not __state__["data_visible"]
 
     def slowEventTrigger(self):
+        # Update Status
+        if(__globals__["status"]):
+            self.sys_status.setText("SYSTEM READY")
+            self.sys_status.setStyleSheet("font: 500 30pt \"Open Sans\"; \
+                                            color: green;")
         # Update Temperatures
         temps = read_temperatures()
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))

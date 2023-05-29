@@ -11,7 +11,7 @@ from w1thermsensor import W1ThermSensor as therm
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
 __globals__ = {
-    "init": False,
+    "status": False,
     "sensors": {
         "temp": {
             "dir": [],
@@ -41,7 +41,7 @@ def init():
         return [False, "Insufficient number of temperature sensors found (<2)!"]
 
     # Finish
-    __globals__["init"] = True
+    __globals__["status"] = True
     return [True, ""]
 
 
