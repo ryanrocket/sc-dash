@@ -2016,7 +2016,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
       <rect>
        <x>630</x>
        <y>30</y>
-       <width>411</width>
+       <width>451</width>
        <height>31</height>
       </rect>
      </property>
@@ -2028,7 +2028,7 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
 font: 600 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="value">
-      <number>20</number>
+      <number>0</number>
      </property>
     </widget>
     <widget class="QLabel" name="label_18">
@@ -2085,6 +2085,53 @@ color: rgb(153, 193, 241);</string>
       <string>NO DATA</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QProgressBar" name="strain">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>460</y>
+      <width>451</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255, 0.5);
+font: 600 16pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>430</y>
+      <width>311</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>18</pointsize>
+      <weight>38</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font: 300 18pt &quot;Open Sans&quot;;</string>
+    </property>
+    <property name="text">
+     <string>BATTERY STRAIN</string>
+    </property>
    </widget>
   </widget>
  </widget>
