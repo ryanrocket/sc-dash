@@ -5,7 +5,8 @@
 ###########################################################
 
 # Packages
-import sys, time, glob, datetime
+import sys, time, glob
+from datetime import datetime
 from w1thermsensor import W1ThermSensor as therm
 
 print("SOLAR CAR DASHBOARD 2023")

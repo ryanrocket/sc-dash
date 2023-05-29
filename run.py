@@ -1,6 +1,7 @@
 # Ryan Wans 2023 for South River Solar Hawks C2
 
-import sys, datetime
+import sys
+from datetime import datetime
 from PyQt5 import QtWidgets, uic, QtCore
 
 import images
