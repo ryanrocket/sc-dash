@@ -6,7 +6,7 @@
 
 # Packages
 import sys, time, glob
-from w1thermsensor import W1ThermSensor as therm
+#from w1thermsensor import W1ThermSensor as therm
 
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
@@ -26,6 +26,8 @@ __globals__ = {
 def log(type, mes):
     print('[' + type.upper() + '] ' + mes)
 
+
+
 # Initialization
 def init():
     log("info", "Starting initialization process...")
@@ -36,10 +38,13 @@ def init():
     __globals__["sensors"]["temp"]["dir"] = tempsense_devices
     log("info", "Found " + str(len(tempsense_devices)) + " temperature sensors!")
     if(len(tempsense_devices) < 2):
-        raise Exception("Insufficient number of temperature sensors found (<2)!")
+        return [False, "Insufficient number of temperature sensors found (<2)!"]
 
     # Finish
     __globals__["init"] = True
+    return [True, ""]
+
+
 
 # Sensor Functionality
 def read_temperatures():
@@ -65,7 +70,11 @@ def read_temperatures():
     # Return output
     return readings
 
+
+
 # Data Sanitization
 
+
+
+# Main
 init()
-print(read_temperatures())
