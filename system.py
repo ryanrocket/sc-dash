@@ -12,7 +12,6 @@ from w1thermsensor import W1ThermSensor as therm
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
 __globals__ = {
-    "status": False,
     "sensors": {
         "temp": {
             "dir": [],
@@ -23,6 +22,26 @@ __globals__ = {
         }
     },
     "start_time": dt.now()
+}
+__state__ = {
+    "status": False,
+    "gear": "PARK",
+    "indicators": {
+        "bms": False,
+        "bat_circ": False,
+        "int_circ": False,
+        "ext_lights": False,
+        "int_lights": False
+    },
+    "warnings": {
+        "ovht": False,
+        "undervolt": False,
+        "overdraw": False,
+        "reception": False,
+        "acc_undervolt": False,
+        "acc_overdraw": False,
+        "message": False
+    }
 }
 
 def log(type, mes):
@@ -43,7 +62,7 @@ def init():
         return [False, "Insufficient number of temperature sensors found (<2)!"]
 
     # Finish
-    __globals__["status"] = True
+    __state__["status"] = True
     return [True, ""]
 
 

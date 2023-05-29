@@ -9,8 +9,7 @@ import images
 import system
 
 __state__ = {
-    "data_visible": True,
-    "gear": "PARK"
+    "data_visible": True
 }
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -42,7 +41,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def slowEventTrigger(self):
         # Update Status
-        if(system.__globals__["status"]):
+        if(system.__state__["status"]):
             self.sys_status.setText("SYSTEM READY")
             self.sys_status.setStyleSheet("font: 500 30pt \"Open Sans\"; \
                                             color: green;")
