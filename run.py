@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, uic, QtCore
 
 import images
 
-from system import *
+import system
 
 __state__ = {
     "data_visible": True,
@@ -41,12 +41,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def slowEventTrigger(self):
         # Update Status
-        if(__globals__["status"]):
+        if(system.__globals__["status"]):
             self.sys_status.setText("SYSTEM READY")
             self.sys_status.setStyleSheet("font: 500 30pt \"Open Sans\"; \
                                             color: green;")
         # Update Temperatures
-        temps = read_temperatures()
+        temps = system.read_temperatures()
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
         self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
 
