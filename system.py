@@ -6,7 +6,7 @@
 
 # Packages
 import sys, time, glob
-from datetime import datetime
+from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 
 print("SOLAR CAR DASHBOARD 2023")
@@ -22,7 +22,7 @@ __globals__ = {
             }
         }
     },
-    "start_time": datetime.now()
+    "start_time": dt.now()
 }
 
 def log(type, mes):

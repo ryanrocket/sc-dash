@@ -1,7 +1,7 @@
 # Ryan Wans 2023 for South River Solar Hawks C2
 
 import sys
-from datetime import datetime
+from datetime import datetime as dt
 from PyQt5 import QtWidgets, uic, QtCore
 
 import images
@@ -56,7 +56,7 @@ class MainWindow(QtWidgets.QMainWindow):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
         self.time.setText(label_time)
-        run_time = (datetime.now() - system.__globals__["start_time"])
+        run_time = (dt.now() - system.__globals__["start_time"])
         self.runTime.setText(run_time.strftime("%H:%M:%S"))
 
 
