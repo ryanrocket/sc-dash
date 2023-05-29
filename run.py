@@ -9,7 +9,8 @@ import system
 
 __state__ = {
     "data_visible": True,
-    "gear": "PARK"
+    "gear": "PARK",
+    "start_time": QtCore.QTime.currentTime()
 }
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -55,6 +56,9 @@ class MainWindow(QtWidgets.QMainWindow):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
         self.time.setText(label_time)
+        run_time = (current_time - __state__["start_time"])
+        self.runTime.setText(run_time.toString('hh:mm:ss'))
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
