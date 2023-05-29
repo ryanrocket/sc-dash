@@ -20,7 +20,8 @@ __globals__ = {
                 "28-0304949749cc": "battery"
             }
         }
-    }
+    },
+    "start_time": time.time()
 }
 
 def log(type, mes):

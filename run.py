@@ -1,6 +1,6 @@
 # Ryan Wans 2023 for South River Solar Hawks C2
 
-import sys
+import sys, time
 from PyQt5 import QtWidgets, uic, QtCore
 
 import images
@@ -9,8 +9,7 @@ import system
 
 __state__ = {
     "data_visible": True,
-    "gear": "PARK",
-    "start_time": QtCore.QTime.currentTime()
+    "gear": "PARK"
 }
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -56,8 +55,8 @@ class MainWindow(QtWidgets.QMainWindow):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
         self.time.setText(label_time)
-        run_time = (current_time - __state__["start_time"])
-        self.runTime.setText(run_time.toString('hh:mm:ss'))
+        run_time = (time.time() - system.__globals__["start_time"])
+        self.runTime.setText(run_time.strftime("%H:%M:%S"))
 
 
 def main():
