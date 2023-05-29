@@ -41,8 +41,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.time.setText(label_time)
         # Update Temperatures
         temps = read_temperatures()
-        self.temp_internal.setText(str(round(temps["cabin"], 1)))
-        self.temp_battery.setText(str(round(temps["battery"], 1)))
+        self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
+        self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
