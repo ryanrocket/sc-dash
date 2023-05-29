@@ -41,7 +41,9 @@ __state__ = {
         "acc_undervolt": False,
         "acc_overdraw": False,
         "message": False
-    }
+    },
+    "lSignal": False,
+    "rSignal": False
 }
 
 def log(type, mes):

@@ -43,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Update Status
         if(system.__state__["status"]):
             self.sys_status.setText("SYSTEM READY")
-            self.sys_status.setStyleSheet("font: 500 30pt \"Open Sans\"; \
+            self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: green;")
         # Update Temperatures
         temps = system.read_temperatures()
