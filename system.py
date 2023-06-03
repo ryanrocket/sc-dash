@@ -143,8 +143,9 @@ def sanitize_temperatures(temps):
         __state__["message"] = ["TEMP SENSOR DISCON", "temp"]
     else:
         __state__["warnings"]["ovht"] = False
-        if (__state__["message"][1] == "temp"):
-            __state__["message"] = False
+        if (__state__["message"] != False):
+            if(__state__["message"][1] == "temp"):
+                __state__["message"] = False
 
     return state
 
