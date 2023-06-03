@@ -55,9 +55,11 @@ class MainWindow(QtWidgets.QMainWindow):
         if (system.__state__["message"] != False):
             self.messageBut.setText(system.__state__["message"][0])
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(154, 153, 150);", "color: rgb(255, 120, 0);"))
+            system.alarm(True)
         else:
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
+            system.alarm(False)
 
     def fastEventTrigger(self):
         # Update RTC
