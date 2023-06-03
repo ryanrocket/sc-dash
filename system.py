@@ -110,6 +110,7 @@ def read_temperatures():
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             readings[real_name] = temp_f
     # Return output
+    sanitize_temperatures(readings)
     return readings
 
 def alarm(state):
@@ -130,18 +131,20 @@ def sanitize_temperatures(temps):
 
     if state["cabOvh"]:
         __state__["warnings"]["ovht"] = True
-        __state__["message"] = "CABIN TEMP OVER LIMIT"
+        __state__["message"] = ["CABIN TEMP OVER LIMIT", "temp"]
     elif state["batOvh"]:
         __state__["warnings"]["ovht"] = True
-        __state__["message"] = "BATTERY TEMP OVER LIMIT"
+        __state__["message"] = ["BATTERY TEMP OVER LIMIT", "temp"]
     elif (state["cabOvh"] and state["batOvh"]):
         __state__["warnings"]["ovht"] = True
-        __state__["message"] = "BAT + CAB TEMP OVER LIMIT"
+        __state__["message"] = ["BAT + CAB TEMP OVER LIMIT", "temp"]
     elif (state["nc"]):
         __state__["warnings"]["message"] = True
-        __state__["message"] = "TEMP SENSOR DISCON"
+        __state__["message"] = ["TEMP SENSOR DISCON", "temp"]
     else:
         __state__["warnings"]["ovht"] = False
+        if (__state__["message"][1] == "temp"):
+            __state__["message"] = False
 
     return state
 

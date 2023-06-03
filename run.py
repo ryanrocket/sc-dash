@@ -48,17 +48,16 @@ class MainWindow(QtWidgets.QMainWindow):
         
         # Update Temperatures
         temps = system.read_temperatures()
-        temp_data = system.sanitize_temperatures(temps)
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
         self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
 
         # Warnings
         if (system.__state__["message"] != False):
-            self.messageBut.setText(system.__state__["message"])
-            self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(154, 153, 150);", "color: rgb(255, 255, 255);"))
+            self.messageBut.setText(system.__state__["message"][0])
+            self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(154, 153, 150);", "color: rgb(255, 120, 0);"))
         else:
             self.messageBut.setText("NO SYSTEM MESSAGES")
-            self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 255, 255);", "color: rgb(154, 153, 150);"))
+            self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
 
     def fastEventTrigger(self):
         # Update RTC
