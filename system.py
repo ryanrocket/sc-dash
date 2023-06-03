@@ -137,7 +137,7 @@ def sanitize_temperatures(temps):
     elif (state["cabOvh"] and state["batOvh"]):
         __state__["warnings"]["ovht"] = True
         __state__["message"] = "BAT + CAB TEMP OVER LIMIT"
-    elif (__state__["nc"]):
+    elif (state["nc"]):
         __state__["warnings"]["message"] = True
         __state__["message"] = "TEMP SENSOR DISCON"
     else:
