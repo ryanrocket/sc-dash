@@ -45,6 +45,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.sys_status.setText("SYSTEM READY")
             self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: green;")
+        
         # Update Temperatures
         temps = system.read_temperatures()
         temp_data = system.sanitize_temperatures(temps)
@@ -54,7 +55,10 @@ class MainWindow(QtWidgets.QMainWindow):
         # Warnings
         if (system.__state__["message"] != False):
             self.messageBut.setText(system.__state__["message"])
-            
+            self.messageBut.setStylesheet(self.messageBut.styleSheet().replace("color: rgb(154, 153, 150);", "color: rgb(255, 255, 255);"))
+        else:
+            self.messageBut.setText("NO SYSTEM MESSAGES")
+            self.messageBut.setStylesheet(self.messageBut.styleSheet().replace("color: rgb(255, 255, 255);", "color: rgb(154, 153, 150);"))
 
     def fastEventTrigger(self):
         # Update RTC
