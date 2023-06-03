@@ -470,9 +470,9 @@ color: rgb(192, 191, 188);</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>400</x>
       <y>680</y>
-      <width>681</width>
+      <width>541</width>
       <height>71</height>
      </rect>
     </property>
@@ -486,7 +486,7 @@ color: rgb(192, 191, 188);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: qlineargradient(spread:pad, x1:0.498, y1:0, x2:0.502, y2:0.982955, stop:0 rgba(20, 20, 20, 255), stop:1 rgba(66, 66, 66, 255));
-color: rgb(255, 255, 255);
+color: rgb(154, 153, 150);
 border-color: rgb(220, 138, 221);</string>
     </property>
     <property name="text">
@@ -558,7 +558,7 @@ color: rgb(153, 193, 241);</string>
      <rect>
       <x>10</x>
       <y>680</y>
-      <width>231</width>
+      <width>211</width>
       <height>71</height>
      </rect>
     </property>
@@ -2131,6 +2131,38 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
      <string>SYSTEM EFFICIENCY</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reset_but_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>680</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.498, y1:0, x2:0.502, y2:0.982955, stop:0 rgba(20, 20, 20, 255), stop:1 rgba(66, 66, 66, 255));
+color: rgb(154, 153, 150);
+border-color: rgb(220, 138, 221);</string>
+    </property>
+    <property name="text">
+     <string>SILENCE</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

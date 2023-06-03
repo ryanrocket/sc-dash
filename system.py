@@ -8,9 +8,13 @@
 import sys, time, glob
 from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
+from gpiozero import Buzzer
 
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
+__pins__ = {
+    "buzzer": 17
+}
 __globals__ = {
     "sensors": {
         "temp": {
@@ -18,6 +22,19 @@ __globals__ = {
             "locations": {
                 "28-03059497131c": "cabin",
                 "28-0304949749cc": "battery"
+            },
+            "domains": {
+                "cabin": 85,
+                "battery": 95
+            }
+        },
+        "buzzer": Buzzer(__pins__["buzzer"]),
+        "voltage": {
+            "battery": {
+                # Format: [100%,  90%, 80%,  70%,  60%,  50%,  40%,  30%,  20%,  15%,  12%,  10%,  5%]
+                "curve":   [3.4, 3.22, 3.21, 3.2, 3.19, 3.18, 3.16, 3.15, 3.13, 3.11, 3.10, 3.08, 3.0],
+                "warn": 3.1,
+                "stop": 2.95
             }
         }
     },
@@ -43,7 +60,8 @@ __state__ = {
         "message": False
     },
     "lSignal": False,
-    "rSignal": False
+    "rSignal": False,
+    "message": False
 }
 
 def log(type, mes):
@@ -85,6 +103,7 @@ def read_temperatures():
         lines = f.readlines()
         f.close()
         equals_pos = lines[1].find('t=')
+        # Format the data
         if equals_pos != -1:
             temp_string = lines[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
@@ -93,9 +112,38 @@ def read_temperatures():
     # Return output
     return readings
 
+def alarm(state):
+    if state:
+        __globals__["sensors"]["buzzer"].beep()
+    else:
+        __globals__["sensors"]["buzzer"].off()
+
 
 
 # Data Sanitization
+def sanitize_temperatures(temps):
+    state = {
+        "cabOvh": (temps["cabin"] > __globals__["sensors"]["temp"]["domains"]["cabin"]),
+        "batOvh": (temps["battery"] > __globals__["sensors"]["temp"]["domains"]["battery"]),
+        "nc": (temps["cabin"] == 32 or temps["battery"] == 32)
+    }
+
+    if state["cabOvh"]:
+        __state__["warnings"]["ovht"] = True
+        __state__["message"] = "CABIN TEMP OVER LIMIT"
+    elif state["batOvh"]:
+        __state__["warnings"]["ovht"] = True
+        __state__["message"] = "BATTERY TEMP OVER LIMIT"
+    elif (state["cabOvh"] and state["batOvh"]):
+        __state__["warnings"]["ovht"] = True
+        __state__["message"] = "BAT + CAB TEMP OVER LIMIT"
+    elif (__state__["nc"]):
+        __state__["warnings"]["message"] = True
+        __state__["message"] = "TEMP SENSOR DISCON"
+    else:
+        __state__["warnings"]["ovht"] = False
+
+    return state
 
 
 

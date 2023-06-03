@@ -47,8 +47,14 @@ class MainWindow(QtWidgets.QMainWindow):
                                             color: green;")
         # Update Temperatures
         temps = system.read_temperatures()
+        temp_data = system.sanitize_temperatures(temps)
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
         self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
+
+        # Warnings
+        if (system.__state__["message"] != False):
+            self.messageBut.setText(system.__state__["message"])
+            
 
     def fastEventTrigger(self):
         # Update RTC
