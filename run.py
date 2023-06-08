@@ -63,7 +63,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def fastEventTrigger(self):
         # Update RTC
-        self.updateRTC(self)
+        self.updateRTC()
 
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
