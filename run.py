@@ -47,9 +47,10 @@ class MainWindow(QtWidgets.QMainWindow):
                                             color: green;")
         
         # Update Temperatures
-        temps = system.read_temperatures()
-        self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
-        self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
+        self.updateTemps()
+
+        # Update Switches
+        self.updateSwitches()
 
         # Warnings 
         if (system.__state__["message"] != False):
@@ -64,6 +65,15 @@ class MainWindow(QtWidgets.QMainWindow):
     def fastEventTrigger(self):
         # Update RTC
         self.updateRTC()
+
+    def updateTemps(self):
+        temps = system.read_temperatures()
+        self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
+        self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
+
+    def updateSwitches():
+        switches = system.read_switches()
+        print(switches)
 
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
