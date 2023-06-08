@@ -79,6 +79,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
             else:
                 getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
+        if (switches["fwd"] != 0) or (switches["rev"] != 0):
+                getattr(self, "park").setStyleSheet(getattr(self, "park").styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
+        else:
+                getattr(self, "park").setStyleSheet(getattr(self, "park").styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
 
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
