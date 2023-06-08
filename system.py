@@ -54,7 +54,7 @@ __globals__ = {
             }
         },
         "switches": {
-            all: ["int_fan", "bat_fan", "int_lts", "fwd", "rev"],
+            "all": ["int_fan", "bat_fan", "int_lts", "fwd", "rev"],
             "int_fan": False,
             "bat_fan": False,
             "int_lts": False,
