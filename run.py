@@ -75,7 +75,6 @@ class MainWindow(QtWidgets.QMainWindow):
         switches = system.read_switches()
         print(switches)
         for label in switches:
-            print("Trying for: " + label)
             if (switches[label] != 0):
                 getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
             else:

@@ -1076,12 +1076,12 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="gear">
+   <widget class="QLabel" name="fwd">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>90</x>
       <y>150</y>
-      <width>231</width>
+      <width>71</width>
       <height>51</height>
      </rect>
     </property>
@@ -1096,11 +1096,11 @@ font: 300 18pt &quot;Open Sans&quot;;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
+     <string notr="true">color: rgb(143, 240, 164, 0.3);
 font: 800 34pt &quot;Open Sans&quot;;</string>
     </property>
     <property name="text">
-     <string>PARK</string>
+     <string>D</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -2163,6 +2163,66 @@ border-color: rgb(220, 138, 221);</string>
     </property>
     <property name="default">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="park">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>61</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>34</pointsize>
+      <weight>99</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(143, 240, 164, 1);
+font: 800 34pt &quot;Open Sans&quot;;</string>
+    </property>
+    <property name="text">
+     <string>P</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="rev">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>150</y>
+      <width>61</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Open Sans</family>
+      <pointsize>34</pointsize>
+      <weight>99</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(143, 240, 164, 0.3);
+font: 800 34pt &quot;Open Sans&quot;;</string>
+    </property>
+    <property name="text">
+     <string>R</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
