@@ -77,9 +77,9 @@ class MainWindow(QtWidgets.QMainWindow):
         for label in switches:
             print("Trying for: " + label)
             if (switches[label] != 0):
-                getattr(self, label).setStyleSheet(self[label].styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
+                getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
             else:
-                getattr(self, label).setStyleSheet(self[label].styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
+                getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
 
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
