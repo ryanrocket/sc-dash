@@ -51,7 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
         self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
 
-        # Warnings
+        # Warnings 
         if (system.__state__["message"] != False):
             self.messageBut.setText(system.__state__["message"][0])
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(154, 153, 150);", "color: rgb(255, 120, 0);"))
@@ -63,6 +63,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def fastEventTrigger(self):
         # Update RTC
+        self.updateRTC(self)
+
+    def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
         self.time.setText(label_time)

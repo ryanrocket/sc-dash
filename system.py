@@ -9,11 +9,27 @@ import sys, time, glob
 from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 from gpiozero import Buzzer
+import RPi.GPIO as GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(13, GPIO.IN)
+GPIO.setup(19, GPIO.IN)
+GPIO.setup(26, GPIO.IN)
+GPIO.setup(20, GPIO.IN)
+GPIO.setup(21, GPIO.IN)
+
+# Yes this is sphegatt code idgaf i got like 3 hours to make this shit
 
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
 __pins__ = {
-    "buzzer": 17
+    "buzzer": 17,
+    "int_fan": 13,
+    "bat_fan": 19,
+    "int_lts": 26,
+    "fwd": 20,
+    "rev": 21
 }
 __globals__ = {
     "sensors": {
@@ -36,6 +52,14 @@ __globals__ = {
                 "warn": 3.1,
                 "stop": 2.95
             }
+        },
+        "switches": {
+            all: ["int_fan", "bat_fan", "int_lts", "fwd", "rev"],
+            "int_fan": False,
+            "bat_fan": False,
+            "int_lts": False,
+            "fwd": False,
+            "rev": False
         }
     },
     "start_time": dt.now()
@@ -111,6 +135,13 @@ def read_temperatures():
             readings[real_name] = temp_f
     # Return output
     sanitize_temperatures(readings)
+    return readings
+
+def read_switches():
+    devices = __globals__["sensors"]["switches"]["all"]
+    readings = {}
+    for switch in devices:
+        readings[switch] = GPIO.input(__pins__[switch])
     return readings
 
 def alarm(state):
