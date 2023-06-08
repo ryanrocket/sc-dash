@@ -71,7 +71,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
         self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
 
-    def updateSwitches():
+    def updateSwitches(self):
         switches = system.read_switches()
         print(switches)
 
