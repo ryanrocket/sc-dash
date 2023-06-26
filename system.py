@@ -23,6 +23,9 @@ GPIO.setup(21, GPIO.IN)
 
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
+def log(type, mes):
+    print('[' + type.upper() + '] ' + mes)
+
 __pins__ = {
     "buzzer": 17,
     "int_fan": 13,
@@ -60,7 +63,8 @@ __globals__ = {
             "int_lts": False,
             "fwd": False,
             "rev": False
-        }
+        },
+        "serial": None
     },
     "start_time": dt.now()
 }
@@ -87,10 +91,6 @@ __state__ = {
     "rSignal": False,
     "message": False
 }
-__serial__ = None
-
-def log(type, mes):
-    print('[' + type.upper() + '] ' + mes)
 
 
 
@@ -114,11 +114,11 @@ def init():
         return [False, "Arduino board not connected."]
     else:
         log("info", "Arduino board connected!")
-        __serial__ = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-        __serial__.reset_input_buffer()
+        __globals__["sensors"]["serial"] = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        __globals__["sensors"]["serial"].reset_input_buffer()
         # Get ALIVE message
         time.sleep(1)
-        log("info", "Arduino status: " + __serial__.readline().decode('utf-8').rstrip())
+        log("info", "Arduino status: " + __globals__["sensors"]["serial"].readline().decode('utf-8').rstrip())
 
     # Finish
     __state__["status"] = True
@@ -161,12 +161,12 @@ def read_switches():
 
 def read_arduino():
     # Send request for sensor data
-    __serial__.write(b"?\n")
+    __globals__["sensors"]["serial"].write(b"?\n")
     # Buffer for ADC delay
     time.sleep(0.5)
     # Read raw data
-    dataLine = __serial__.readline().decode('utf-8').rstrip()
-    afrmLine = __serial__.readline().decode('utf-8').rstrip()
+    dataLine = __globals__["sensors"]["serial"].readline().decode('utf-8').rstrip()
+    afrmLine = __globals__["sensors"]["serial"].readline().decode('utf-8').rstrip()
     # Sanatize data
     status = (afrmLine == "DONE")
     rawDataMatrix = dataLine.split(";")
