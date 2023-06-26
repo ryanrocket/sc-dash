@@ -47,7 +47,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                             color: green;")
         
         # Update Temperatures
-        self.updateTemps()
+        # self.updateTemps()
 
         # Update Arduino Sensor Readings
         self.updateArduino()
