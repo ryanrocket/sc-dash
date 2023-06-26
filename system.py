@@ -108,6 +108,7 @@ def init():
     
     # Ardiuno Sensors
     if (not os.path.isdir('/dev/ttyACM0')):
+        log("error", "Arduino board not connected.")
         return [False, "Arduino board not connected."]
     else:
         log("info", "Arduino board connected!")
