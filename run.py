@@ -71,11 +71,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def updateArduino(self):
         data = system.sanatize_arduino(system.read_arduino())
-        self.dataBatteryVolt.setText(data["motorV"])
-        self.dataSolarVolt.setText(data["solarV"])
-        self.dataBatteryDraw.setText(data["motorI"])
-        self.dataSolarDraw.setText(data["solarI"])
-        self.dataAccDraw.setText(data["accsyI"])
+        self.dataBatteryVolt.setText(str(data["motorV"]) + " V")
+        self.dataSolarVolt.setText(str(data["solarV"]) + " V")
+        self.dataBatteryDraw.setText(str(data["motorI"]) + " A")
+        self.dataSolarDraw.setText(str(data["solarI"]) + " A")
+        self.dataAccDraw.setText(str(data["accsyI"]) + " A")
 
     def updateTemps(self):
         temps = system.read_temperatures()
