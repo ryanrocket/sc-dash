@@ -49,6 +49,9 @@ class MainWindow(QtWidgets.QMainWindow):
         # Update Temperatures
         self.updateTemps()
 
+        # Update Arduino Sensor Readings
+        self.updateArduino()
+
         # Update Switches
         self.updateSwitches()
 
@@ -65,6 +68,14 @@ class MainWindow(QtWidgets.QMainWindow):
     def fastEventTrigger(self):
         # Update RTC
         self.updateRTC()
+
+    def updateArduino(self):
+        data = system.sanatize_arduino(system.read_arduino())
+        self.dataBatteryVolt.setText(data["motorV"])
+        self.dataSolarVolt.setText(data["solarV"])
+        self.dataBatteryDraw.setText(data["motorI"])
+        self.dataSolarDraw.setText(data["solarI"])
+        self.dataAccDraw.setText(data["accsyI"])
 
     def updateTemps(self):
         temps = system.read_temperatures()

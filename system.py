@@ -5,7 +5,7 @@
 ###########################################################
 
 # Packages
-import sys, time, glob
+import sys, time, glob, serial, os
 from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 from gpiozero import Buzzer
@@ -87,6 +87,7 @@ __state__ = {
     "rSignal": False,
     "message": False
 }
+__serial__ = None
 
 def log(type, mes):
     print('[' + type.upper() + '] ' + mes)
@@ -104,6 +105,17 @@ def init():
     log("info", "Found " + str(len(tempsense_devices)) + " temperature sensors!")
     if(len(tempsense_devices) < 2):
         return [False, "Insufficient number of temperature sensors found (<2)!"]
+    
+    # Ardiuno Sensors
+    if (not os.path.isdir('/dev/ttyACM0')):
+        return [False, "Arduino board not connected."]
+    else:
+        log("info", "Arduino board connected!")
+        __serial__ = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+        __serial__.reset_input_buffer()
+        # Get ALIVE message
+        time.sleep(1)
+        log("info", "Arduino status: " + __serial__.readline().decode('utf-8').rstrip())
 
     # Finish
     __state__["status"] = True
@@ -144,6 +156,19 @@ def read_switches():
         readings[switch] = GPIO.input(__pins__[switch])
     return readings
 
+def read_arduino():
+    # Send request for sensor data
+    __serial__.write(b"?\n")
+    # Buffer for ADC delay
+    time.sleep(0.5)
+    # Read raw data
+    dataLine = __serial__.readline().decode('utf-8').rstrip()
+    afrmLine = __serial__.readline().decode('utf-8').rstrip()
+    # Sanatize data
+    status = (afrmLine == "DONE")
+    rawDataMatrix = dataLine.split(";")
+    return [rawDataMatrix, status]
+
 def alarm(state):
     if state:
         __globals__["sensors"]["buzzer"].beep()
@@ -180,6 +205,18 @@ def sanitize_temperatures(temps):
 
     return state
 
+def sanatize_arduino(raw):
+    # Order: Motor Current, Solar Current, Accessory Current, Motor Voltage, Solar Voltage
+    data = raw[0]
+    state = {
+        "motorI": data[0],
+        "solarI": data[1],
+        "accsyI": data[2],
+        "motorV": data[3],
+        "solarV": data[4],
+        "valid": raw[1]
+    }
+    return state
 
 
 # Main
