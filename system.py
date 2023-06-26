@@ -104,7 +104,8 @@ def init():
     __globals__["sensors"]["temp"]["dir"] = tempsense_devices
     log("info", "Found " + str(len(tempsense_devices)) + " temperature sensors!")
     if(len(tempsense_devices) < 2):
-        return [False, "Insufficient number of temperature sensors found (<2)!"]
+        # return [False, "Insufficient number of temperature sensors found (<2)!"]
+        print("NONE")
     
     # Ardiuno Sensors
     if (not os.path.isdir('/dev/ttyACM0')):
