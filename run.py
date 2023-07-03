@@ -12,6 +12,16 @@ __state__ = {
     "data_visible": True
 }
 
+class FastUpdate(QtCore.QRunnable):
+    def __init__(self, *args, **kwargs):
+        super(FastUpdate, self).__init__()
+        self.args = args
+        self.kwargs = kwargs
+
+    @pyqtSlot()
+    def run(self):
+        # Fast Update Execution
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         # QtWidgets.QMainWindow.__init__(self, parent)
