@@ -30,13 +30,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # QtWidgets.QMainWindow.__init__(self, parent)
         super(MainWindow, self).__init__(parent)
         uic.loadUi("./v01pre.ui", self)
-        print(self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
         self.threadpool = QtCore.QThreadPool()
 
         # Create Multithreaded Workers
-        fastWorker = FastUpdate(self.fastEventTrigger)
-        print(fastWorker)
+        self.fastWorker = FastUpdate(self.fastEventTrigger)
 
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
@@ -45,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Start fast timers
         timerFast = QtCore.QTimer(self)
-        timerFast.timeout.connect(self.threadpool.start(fastWorker))
+        timerFast.timeout.connect(self.startFastWorker)
         timerFast.start(500)
 
     @QtCore.pyqtSlot()
@@ -84,6 +82,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
+
+    def startFastWorker(self):
+        self.threadpool.start(self.fastWorker)
 
     def fastEventTrigger(self):
         # Update RTC
