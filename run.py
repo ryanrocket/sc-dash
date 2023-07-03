@@ -35,9 +35,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.threadpool = QtCore.QThreadPool()
         system.log("info", "Multithreading with maximum of: %d Threads" % self.threadpool.maxThreadCount())
 
-        # Create Multithreaded Workers
-        self.fastWorker = FastUpdate(self.fastEventTrigger)
-
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
         timerSlow.timeout.connect(self.slowEventTrigger)
@@ -86,6 +83,8 @@ class MainWindow(QtWidgets.QMainWindow):
             system.alarm(False)
 
     def startFastWorker(self):
+        # Create Multithreaded Workers
+        self.fastWorker = FastUpdate(self.fastEventTrigger)
         system.log("info", "FastUpdate Worker Qued For RUN")
         self.threadpool.start(self.fastWorker)
 
