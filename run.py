@@ -23,6 +23,7 @@ class FastUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Fast Update Execution print(args, kwargs)
+        system.log("info", "FastUpdate Worker Instance: RUN")
         self.fn(*self.args, **self.kwargs)
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -84,6 +85,7 @@ class MainWindow(QtWidgets.QMainWindow):
             system.alarm(False)
 
     def startFastWorker(self):
+        system.log("info", "FastUpdate Worker Qued For RUN")
         self.threadpool.start(self.fastWorker)
 
     def fastEventTrigger(self):
