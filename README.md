@@ -1,1 +1,1 @@
-# Qt-py Dashboard for Rock Pi
+# Qt-py Dashboard for Challenger 2023

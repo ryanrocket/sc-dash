@@ -75,6 +75,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def startSlowWorker(self):
         # Create Multithreaded Workers (for the slow shit)
+        system.log("info", "Using " + self.threadpool.activeThreadCount() + " (+1) of " + self.threadpool.maxThreadCount() + " Available Threads")
         self.slowWorker = SlowUpdate(self.slowEventTrigger)
         self.threadpool.start(self.slowWorker)
 
