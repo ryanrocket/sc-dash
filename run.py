@@ -36,6 +36,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Create Multithreaded Workers
         fastWorker = FastUpdate(self.fastEventTrigger)
+        print(fastWorker)
 
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
