@@ -13,14 +13,16 @@ __state__ = {
 }
 
 class FastUpdate(QtCore.QRunnable):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, fn, *args, **kwargs):
         super(FastUpdate, self).__init__()
+        self.fn = fn
         self.args = args
         self.kwargs = kwargs
 
     @pyqtSlot()
     def run(self):
-        # Fast Update Execution
+        # Fast Update Execution print(args, kwargs)
+        self.fn()
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -29,13 +31,19 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi("./v01pre.ui", self)
         print(self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
+        self.threadpool = QtCore.QThreadPool()
+
+        # Create Multithreaded Workers
+        fastWorker = FastUpdate(self.fastEventTrigger)
+
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
         timerSlow.timeout.connect(self.slowEventTrigger)
         timerSlow.start(5000) 
+
         # Start fast timers
         timerFast = QtCore.QTimer(self)
-        timerFast.timeout.connect(self.fastEventTrigger)
+        timerFast.timeout.connect(self.threadpool.start(fastWorker))
         timerFast.start(500)
 
     @QtCore.pyqtSlot()
