@@ -5,7 +5,7 @@
 ###########################################################
 
 # Packages
-import sys, time, glob, serial, os
+import sys, time, glob, serial, os, pprint
 from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 from gpiozero import Buzzer
@@ -157,6 +157,7 @@ def read_switches():
     readings = {}
     for switch in devices:
         readings[switch] = GPIO.input(__pins__[switch])
+    pprint(readings)
     return readings
 
 def read_arduino():
