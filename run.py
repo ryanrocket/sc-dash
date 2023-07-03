@@ -14,7 +14,6 @@ __state__ = {
 
 class FastUpdate(QtCore.QRunnable):
     def __init__(self, fn, *args, **kwargs):
-        system.log("info", "New FastUpdate Worker Thread Created")
         super(FastUpdate, self).__init__()
         self.fn = fn
         self.args = args
@@ -23,7 +22,18 @@ class FastUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Fast Update Execution print(args, kwargs)
-        system.log("info", "FastUpdate Worker Instance: RUN")
+        self.fn(*self.args, **self.kwargs)
+
+class SlowUpdate(QtCore.QRunnable):
+    def __init__(self, fn, *args, **kwargs):
+        super(SlowUpdate, self).__init__()
+        self.fn = fn
+        self.args = args
+        self.kwargs = kwargs
+
+    @QtCore.pyqtSlot()
+    def run(self):
+        # Slow Update Execution print(args, kwargs)
         self.fn(*self.args, **self.kwargs)
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -37,13 +47,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
-        timerSlow.timeout.connect(self.slowEventTrigger)
+        timerSlow.timeout.connect(self.startSlowWorker)
         timerSlow.start(5000) 
+        system.log("info", "SlowUpdate Worker connected to timerSlow Interval: 5000mS")
 
         # Start fast timers
         timerFast = QtCore.QTimer(self)
         timerFast.timeout.connect(self.startFastWorker)
         timerFast.start(500)
+        system.log("info", "FastUpdate Worker connected to timerFast Interval: 500mS")
 
     @QtCore.pyqtSlot()
     def toggle_data_visibility(self):
@@ -55,6 +67,16 @@ class MainWindow(QtWidgets.QMainWindow):
             self.data.show()
             self.data_div.show()
         __state__["data_visible"] = not __state__["data_visible"]
+
+    def startFastWorker(self):
+        # Create Multithreaded Workers
+        self.fastWorker = FastUpdate(self.fastEventTrigger)
+        self.threadpool.start(self.fastWorker)
+
+    def startSlowWorker(self):
+        # Create Multithreaded Workers (for the slow shit)
+        self.slowWorker = SlowUpdate(self.slowEventTrigger)
+        self.threadpool.start(self.slowWorker)
 
     def slowEventTrigger(self):
         # Update Status
@@ -81,12 +103,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
-
-    def startFastWorker(self):
-        # Create Multithreaded Workers
-        self.fastWorker = FastUpdate(self.fastEventTrigger)
-        system.log("info", "FastUpdate Worker Qued For RUN")
-        self.threadpool.start(self.fastWorker)
 
     def fastEventTrigger(self):
         # Update RTC
