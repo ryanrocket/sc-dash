@@ -49,6 +49,7 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi("./v01pre.ui", self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
         self.threadpool = QtCore.QThreadPool()
+        self.beep = True
         system.log("info", "Multithreading with maximum of: %d Threads" % self.threadpool.maxThreadCount())
 
         # Start slow timer
@@ -78,6 +79,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # Create Multithreaded Workers
         # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
         #system.log("info", "Running FastWorker Startup Process")
+        system.alarm(self.beep)
+        self.beep = not self.beep
         self.fastWorker = FastUpdate(self.fastEventTrigger)
         self.threadpool.start(self.fastWorker)
 
