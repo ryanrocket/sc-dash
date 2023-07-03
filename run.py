@@ -14,6 +14,7 @@ __state__ = {
 
 class FastUpdate(QtCore.QRunnable):
     def __init__(self, fn, *args, **kwargs):
+        system.log("info", "New FastUpdate Worker Thread Created")
         super(FastUpdate, self).__init__()
         self.fn = fn
         self.args = args
@@ -22,7 +23,7 @@ class FastUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Fast Update Execution print(args, kwargs)
-        self.fn()
+        self.fn(*self.args, **self.kwargs)
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
