@@ -157,7 +157,7 @@ def read_switches():
     readings = {}
     for switch in devices:
         readings[switch] = GPIO.input(__pins__[switch])
-    pprint.pprint(readings)
+    # pprint.pprint(readings)
     return readings
 
 def read_arduino():
