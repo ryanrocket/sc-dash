@@ -33,6 +33,7 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi("./v01pre.ui", self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
         self.threadpool = QtCore.QThreadPool()
+        system.log("info", "Multithreading with maximum of: %d Threads" % self.threadpool.maxThreadCount())
 
         # Create Multithreaded Workers
         self.fastWorker = FastUpdate(self.fastEventTrigger)
