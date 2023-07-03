@@ -19,7 +19,7 @@ class FastUpdate(QtCore.QRunnable):
         self.args = args
         self.kwargs = kwargs
 
-    @pyqtSlot()
+    @QtCore.pyqtSlot()
     def run(self):
         # Fast Update Execution print(args, kwargs)
         self.fn()
