@@ -34,7 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.threadpool = QtCore.QThreadPool()
 
         # Create Multithreaded Workers
-        fastWorker = FastUpdate(self, self.fastEventTrigger)
+        fastWorker = FastUpdate(self.fastEventTrigger)
 
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
