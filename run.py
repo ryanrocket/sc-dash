@@ -27,21 +27,6 @@ class FastUpdate(QtCore.QRunnable):
         self.fn(*self.args, **self.kwargs)
         #system.log("info", "Finished FastWorker Function!")
 
-class SlowUpdate(QtCore.QRunnable):
-    def __init__(self, fn, *args, **kwargs):
-        super(SlowUpdate, self).__init__()
-        #system.log("info", "Running SlowWorker Instatiation")
-        self.fn = fn
-        self.args = args
-        self.kwargs = kwargs
-
-    @QtCore.pyqtSlot()
-    def run(self):
-        # Slow Update Execution print(args, kwargs)
-        #system.log("info", "Running SlowWorker Function!")
-        self.fn(*self.args, **self.kwargs)
-        #system.log("info", "Finished SlowWorker Function!")
-
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         # QtWidgets.QMainWindow.__init__(self, parent)
@@ -54,7 +39,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
         timerSlow.setSingleShot(False)
-        timerSlow.timeout.connect(self.startSlowWorker)
+        timerSlow.timeout.connect(self.slowEventTrigger)
         timerSlow.setInterval(4999)
         timerSlow.start() 
         system.log("info", "SlowUpdate Worker connected to timerSlow Interval: 5000mS")
@@ -84,12 +69,6 @@ class MainWindow(QtWidgets.QMainWindow):
         #system.log("info", "Running FastWorker Startup Process")
         self.fastWorker = FastUpdate(self.fastEventTrigger)
         self.threadpool.start(self.fastWorker)
-
-    def startSlowWorker(self):
-        # Create Multithreaded Workers (for the slow shit)
-        #system.log("info", "Running SlowWorker Startup Process")
-        self.slowWorker = SlowUpdate(self.slowEventTrigger)
-        self.threadpool.start(self.slowWorker)
 
     def slowEventTrigger(self):
         # Update Status
