@@ -122,6 +122,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # dataTemps = self.updateTemps()
         dataArduino = self.updateArduino()
         dataSwitch = self.updateSwitches()
+        system.read_gps()
         return [dataStatus, None, dataArduino, dataSwitch]
 
     @QtCore.pyqtSlot(object)
@@ -162,7 +163,6 @@ class MainWindow(QtWidgets.QMainWindow):
     def fastEventTrigger(self):
         # Update RTC
         raw = self.updateRTC()
-        system.read_gps()
         return raw
     
     @QtCore.pyqtSlot(object)
