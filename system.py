@@ -5,7 +5,7 @@
 ###########################################################
 
 # Packages
-import sys, time, glob, serial, os, pprint
+import sys, time, glob, serial, os, pprint, io
 from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 from gpiozero import Buzzer
@@ -65,7 +65,8 @@ __globals__ = {
             "rev": False
         },
         "serial": None,
-        "gps": None
+        "gps": None,
+        "gpsOutput": None
     },
     "start_time": dt.now()
 }
@@ -134,9 +135,8 @@ def init():
             parity = serial.PARITY_NONE,
             stopbits = serial.STOPBITS_ONE,
             bytesize = serial.EIGHTBITS,
-            timeout = 1
-        )
-        
+            timeout = 1)
+        __globals__["sensors"]["gpsOutput"] = io.TextIOWrapper(io.BufferedRWPair(__globals__["sensors"]["gps"], __globals__["sensors"]["gps"]))
 
     # Finish
     __state__["status"] = True
@@ -190,6 +190,10 @@ def read_arduino():
     status = (afrmLine == "DONE")
     rawDataMatrix = dataLine.split(";")
     return [rawDataMatrix, status]
+
+def read_gps():
+    line = __globals__["sensors"]["gpsOutput"].readline()
+    log("info", line)
 
 def alarm(state):
     if state:

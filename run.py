@@ -161,7 +161,8 @@ class MainWindow(QtWidgets.QMainWindow):
     
     def fastEventTrigger(self):
         # Update RTC
-        raw =  self.updateRTC()
+        raw = self.updateRTC()
+        system.read_gps()
         return raw
     
     @QtCore.pyqtSlot(object)
