@@ -151,8 +151,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def fastEventTrigger(self):
         # Update RTC
-        # self.updateRTC()
-        return self.updateRTC()
+        raw =  self.updateRTC()
+        self.time.setText(raw[0])
+        self.runTime.setText(raw[1])
     
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
@@ -187,11 +188,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
-        # self.time.setText(label_time)
         run_time = (dt.now() - system.__globals__["start_time"]).seconds
         hours, remainder = divmod(run_time, 3600)
         minutes, seconds = divmod(remainder, 60)
-        # self.runTime.setText('{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds)))
         runTime = '{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds))
         return [label_time, runTime]
 
