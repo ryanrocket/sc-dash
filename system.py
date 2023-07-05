@@ -64,7 +64,8 @@ __globals__ = {
             "fwd": False,
             "rev": False
         },
-        "serial": None
+        "serial": None,
+        "gps": None
     },
     "start_time": dt.now()
 }
@@ -119,6 +120,23 @@ def init():
         # Get ALIVE message
         time.sleep(1)
         log("info", "Arduino status: " + __globals__["sensors"]["serial"].readline().decode('utf-8').rstrip())
+
+    # GPS Module
+    if (not os.path.exists('/dev/ttyAMA0')):
+        log("error", "GPS module not connected.")
+        return [False, "GPS module not connected."]
+    else:
+        log("info", "GPS module connected!")
+        time.sleep(1)
+        __globals__["sensors"]["gps"] = serial.Serial(
+            port = '/dev/ttyAMA0',
+            baudrate = 9600,
+            parity = serial.PARITY_NONE,
+            stopbits = serial.STOPBITS_ONE,
+            bytesize = serial.EIGHTBITS,
+            timeout = 1
+        )
+        
 
     # Finish
     __state__["status"] = True
