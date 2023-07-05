@@ -83,6 +83,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def startFastWorker(self):
+        print("attempting thread startup")
         # Create Multithreaded Workers
         # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
         # Create Instantiations
