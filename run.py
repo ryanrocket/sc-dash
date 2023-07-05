@@ -118,73 +118,69 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def slowEventTrigger(self):
         # Update Status
-        '''
-        if(system.__state__["status"]):
+        dataStatus = system.__state__
+        dataTemps = self.updateTemps()
+        dataArduino = self.updateArduino()
+        dataSwitch = self.updateSwitches()
+        return [dataStatus, dataTemps, dataArduino, dataSwitch]
+
+    @QtCore.pyqtSlot(object)
+    def slowEventUpdate(self, result):
+        # Update Arduino
+        self.dataBatteryVolt.setText(str(result[2]["motorV"]) + " V")
+        self.dataSolarVolt.setText(str(result[2]["solarV"]) + " V")
+        self.dataBatteryDraw.setText(str(result[2]["motorI"]) + " A")
+        self.dataSolarDraw.setText(str(result[2]["solarI"]) + " A")
+        self.dataAccDraw.setText(str(result[2]["accsyI"]) + " A")
+        # Update Temps
+        self.temp_internal.setText((str(round(result[1]["cabin"], 1)) + " F"))
+        self.temp_battery.setText((str(round(result[1]["battery"], 1)) + " F"))
+        # Update Switches
+        for label in result[3]:
+            if (result[3][label] != 0):
+                getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
+            else:
+                getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
+        if (result[3]["fwd"] != 0) or (result[3]["rev"] != 0):
+                getattr(self, "park").setStyleSheet(getattr(self, "park").styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
+        else:
+                getattr(self, "park").setStyleSheet(getattr(self, "park").styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
+        # Update Warnings
+        if(result[0]["status"]):
             self.sys_status.setText("SYSTEM READY")
             self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: green;")
-        
-        # Update Temperatures
-        # self.updateTemps()
-
-        # Update Arduino Sensor Readings
-        self.updateArduino()
-
-        # Update Switches
-        self.updateSwitches()
-
-        # Warnings 
-        if (system.__state__["message"] != False):
-            self.messageBut.setText(system.__state__["message"][0])
+        if (result[0]["message"] != False):
+            self.messageBut.setText(result[0]["message"][0])
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(154, 153, 150);", "color: rgb(255, 120, 0);"))
             system.alarm(True)
         else:
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
-        '''
-        return ["slow done"]
-
-    @QtCore.pyqtSlot(object)
-    def slowEventUpdate(self, result):
-        print(result)
-
+    
     def fastEventTrigger(self):
         # Update RTC
         raw =  self.updateRTC()
-        self.time.setText(raw[0])
-        self.runTime.setText(raw[1])
+        return raw
     
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
-        print(result)
+        self.time.setText(result[0])
+        self.runTime.setText(result[1])
 
     def updateArduino(self):
         data = system.sanatize_arduino(system.read_arduino())
-        self.dataBatteryVolt.setText(str(data["motorV"]) + " V")
-        self.dataSolarVolt.setText(str(data["solarV"]) + " V")
-        self.dataBatteryDraw.setText(str(data["motorI"]) + " A")
-        self.dataSolarDraw.setText(str(data["solarI"]) + " A")
-        self.dataAccDraw.setText(str(data["accsyI"]) + " A")
+        return data
 
     def updateTemps(self):
         temps = system.read_temperatures()
-        self.temp_internal.setText((str(round(temps["cabin"], 1)) + " F"))
-        self.temp_battery.setText((str(round(temps["battery"], 1)) + " F"))
+        return temps
 
     def updateSwitches(self):
         switches = system.read_switches()
-        print(switches)
-        for label in switches:
-            if (switches[label] != 0):
-                getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
-            else:
-                getattr(self, label).setStyleSheet(getattr(self, label).styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
-        if (switches["fwd"] != 0) or (switches["rev"] != 0):
-                getattr(self, "park").setStyleSheet(getattr(self, "park").styleSheet().replace("143, 240, 164, 1", "143, 240, 164, 0.3"))
-        else:
-                getattr(self, "park").setStyleSheet(getattr(self, "park").styleSheet().replace("143, 240, 164, 0.3", "143, 240, 164, 1"))
-
+        return switches
+        
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
