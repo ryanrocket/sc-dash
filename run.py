@@ -12,7 +12,7 @@ __state__ = {
     "data_visible": True
 }
 
-class FastUpdate(QtCore.QRunnable):
+class FastUpdate(QtCore.QObject):
 
     finished = QtCore.pyqtSignal(object)
 
