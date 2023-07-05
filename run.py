@@ -83,7 +83,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def startFastWorker(self):
-        print("attempting thread startup")
         # Create Multithreaded Workers
         # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
         # Create Instantiations
@@ -93,7 +92,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fastWorker.moveToThread(self.threadFast)
         # Create signal connections
         self.threadFast.started.connect(self.fastWorker.run)
-        self.fastWorker.finished.connect(self.threadFast.quit)
+        self.fastWorker.finished.connect(self.fastEventUpdate)
+        # self.fastWorker.finished.connect(self.threadFast.quit)
         self.fastWorker.finished.connect(self.fastWorker.deleteLater)
         self.threadFast.finished.connect(self.threadFast.deleteLater)
         # Start thread
