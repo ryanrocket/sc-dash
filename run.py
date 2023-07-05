@@ -13,9 +13,11 @@ __state__ = {
 }
 
 class FastUpdate(QtCore.QRunnable):
+
+    finished = QtCore.pyqtSignal(object)
+
     def __init__(self, fn, *args, **kwargs):
         super(FastUpdate, self).__init__()
-        #system.log("info", "Running FastWorker Instantiation")
         self.fn = fn
         self.args = args
         self.kwargs = kwargs
@@ -23,9 +25,24 @@ class FastUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Fast Update Execution print(args, kwargs)
-        #system.log("info", "Running FastWorker Function!")
-        self.fn(*self.args, **self.kwargs)
-        #system.log("info", "Finished FastWorker Function!")
+        data = self.fn(*self.args, **self.kwargs)
+        self.finished.emit(data)
+
+class SlowUpdate(QtCore.QRunnable):
+
+    finished = QtCore.pyqtSignal(object)
+
+    def __init__(self, fn, *args, **kwargs):
+        super(SlowUpdate, self).__init__()
+        self.fn = fn
+        self.args = args
+        self.kwargs = kwargs
+
+    @QtCore.pyqtSlot()
+    def run(self):
+        # Slow Update Execution print(args, kwargs)
+        data = self.fn(*self.args, **self.kwargs)
+        self.finished.emit(data)
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -39,9 +56,9 @@ class MainWindow(QtWidgets.QMainWindow):
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
         timerSlow.setSingleShot(False)
-        timerSlow.timeout.connect(self.slowEventTrigger)
+        timerSlow.timeout.connect(self.startSlowWorker)
         timerSlow.setInterval(4999)
-        timerSlow.start() 
+        # timerSlow.start() 
         system.log("info", "SlowUpdate Worker connected to timerSlow Interval: 5000mS")
 
         # Start fast timers
@@ -63,12 +80,29 @@ class MainWindow(QtWidgets.QMainWindow):
             self.data_div.show()
         __state__["data_visible"] = not __state__["data_visible"]
 
+    @QtCore.pyqtSlot()
     def startFastWorker(self):
         # Create Multithreaded Workers
         # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
-        #system.log("info", "Running FastWorker Startup Process")
+        # Create Instantiations
+        self.threadFast = QtCore.QThread()
         self.fastWorker = FastUpdate(self.fastEventTrigger)
-        self.threadpool.start(self.fastWorker)
+        # Move to selected thread
+        self.fastWorker.moveToThread(self.threadFast)
+        # Create signal connections
+        self.threadFast.started.connect(self.fastWorker.run)
+        self.fastWorker.finished.connect(self.threadFast.quit)
+        self.fastWorker.finished.connect(self.fastWorker.deleteLater)
+        self.fastThread.finished.connect(self.fastThread.deleteLater)
+        # Start thread
+        self.fastThread.start()
+
+    @QtCore.pyqtSlot()
+    def startSlowWorker(self):
+        # Create Multithreaded Workers (for the slow shit)
+        #system.log("info", "Running SlowWorker Startup Process")
+        self.slowWorker = SlowUpdate(self.slowEventTrigger)
+        self.threadpool.start(self.slowWorker)
 
     def slowEventTrigger(self):
         # Update Status
@@ -98,7 +132,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def fastEventTrigger(self):
         # Update RTC
-        self.updateRTC()
+        # self.updateRTC()
+        return self.updateRTC()
+    
+    @QtCore.pyqtSlot(object)
+    def fastEventUpdate(self, result):
+        print(result)
 
     def updateArduino(self):
         data = system.sanatize_arduino(system.read_arduino())
@@ -129,12 +168,13 @@ class MainWindow(QtWidgets.QMainWindow):
     def updateRTC(self):
         current_time = QtCore.QTime.currentTime()
         label_time = current_time.toString('hh:mm:ss')
-        self.time.setText(label_time)
+        # self.time.setText(label_time)
         run_time = (dt.now() - system.__globals__["start_time"]).seconds
         hours, remainder = divmod(run_time, 3600)
         minutes, seconds = divmod(remainder, 60)
-        self.runTime.setText('{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds)))
-
+        # self.runTime.setText('{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds)))
+        runTime = '{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds))
+        return [label_time, runTime]
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

@@ -19,7 +19,7 @@ GPIO.setup(26, GPIO.IN)
 GPIO.setup(20, GPIO.IN)
 GPIO.setup(21, GPIO.IN)
 
-# Yes this is sphegatt code idgaf i got like 3 hours to make this shit
+# Yes this is sphegatt code i dont care
 
 print("SOLAR CAR DASHBOARD 2023")
 # Globals
