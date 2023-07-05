@@ -58,7 +58,7 @@ class MainWindow(QtWidgets.QMainWindow):
         timerSlow.setSingleShot(False)
         timerSlow.timeout.connect(self.startSlowWorker)
         timerSlow.setInterval(4999)
-        # timerSlow.start() 
+        timerSlow.start() 
         system.log("info", "SlowUpdate Worker connected to timerSlow Interval: 5000mS")
 
         # Start fast timers
@@ -100,13 +100,25 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def startSlowWorker(self):
-        # Create Multithreaded Workers (for the slow shit)
-        #system.log("info", "Running SlowWorker Startup Process")
-        self.slowWorker = SlowUpdate(self.slowEventTrigger)
-        self.threadpool.start(self.slowWorker)
+        # Create Multithreaded Workers
+        # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
+        # Create Instantiations
+        self.threadSlow = QtCore.QThread()
+        self.slowWorker = FastUpdate(self.slowEventTrigger)
+        # Move to selected thread
+        self.slowWorker.moveToThread(self.threadSlow)
+        # Create signal connections
+        self.threadSlow.started.connect(self.slowWorker.run)
+        self.slowWorker.finished.connect(self.slowEventUpdate)
+        self.slowWorker.finished.connect(self.threadSlow.quit)
+        self.slowWorker.finished.connect(self.slowWorker.deleteLater)
+        self.threadSlow.finished.connect(self.threadSlow.deleteLater)
+        # Start thread
+        self.threadSlow.start()
 
     def slowEventTrigger(self):
         # Update Status
+        '''
         if(system.__state__["status"]):
             self.sys_status.setText("SYSTEM READY")
             self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
@@ -130,6 +142,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
+        '''
+        return ["slow done"]
+
+    @QtCore.pyqtSlot(object)
+    def slowEventUpdate(self, result):
+        print(result)
 
     def fastEventTrigger(self):
         # Update RTC
