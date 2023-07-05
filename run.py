@@ -93,9 +93,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.threadFast.started.connect(self.fastWorker.run)
         self.fastWorker.finished.connect(self.threadFast.quit)
         self.fastWorker.finished.connect(self.fastWorker.deleteLater)
-        self.fastThread.finished.connect(self.fastThread.deleteLater)
+        self.threadFast.finished.connect(self.threadFast.deleteLater)
         # Start thread
-        self.fastThread.start()
+        self.threadFast.start()
 
     @QtCore.pyqtSlot()
     def startSlowWorker(self):
