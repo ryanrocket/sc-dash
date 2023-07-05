@@ -41,6 +41,7 @@ class SlowUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Slow Update Execution print(args, kwargs)
+        print("thread started")
         data = self.fn(*self.args, **self.kwargs)
         self.finished.emit(data)
 
