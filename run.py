@@ -41,7 +41,6 @@ class SlowUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Slow Update Execution print(args, kwargs)
-        print("thread started")
         data = self.fn(*self.args, **self.kwargs)
         self.finished.emit(data)
 
@@ -93,7 +92,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Create signal connections
         self.threadFast.started.connect(self.fastWorker.run)
         self.fastWorker.finished.connect(self.fastEventUpdate)
-        # self.fastWorker.finished.connect(self.threadFast.quit)
+        self.fastWorker.finished.connect(self.threadFast.quit)
         self.fastWorker.finished.connect(self.fastWorker.deleteLater)
         self.threadFast.finished.connect(self.threadFast.deleteLater)
         # Start thread
