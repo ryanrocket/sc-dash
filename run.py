@@ -119,10 +119,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def slowEventTrigger(self):
         # Update Status
         dataStatus = system.__state__
-        dataTemps = self.updateTemps()
+        # dataTemps = self.updateTemps()
         dataArduino = self.updateArduino()
         dataSwitch = self.updateSwitches()
-        return [dataStatus, dataTemps, dataArduino, dataSwitch]
+        return [dataStatus, None, dataArduino, dataSwitch]
 
     @QtCore.pyqtSlot(object)
     def slowEventUpdate(self, result):
@@ -133,8 +133,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dataSolarDraw.setText(str(result[2]["solarI"]) + " A")
         self.dataAccDraw.setText(str(result[2]["accsyI"]) + " A")
         # Update Temps
-        self.temp_internal.setText((str(round(result[1]["cabin"], 1)) + " F"))
-        self.temp_battery.setText((str(round(result[1]["battery"], 1)) + " F"))
+        # self.temp_internal.setText((str(round(result[1]["cabin"], 1)) + " F"))
+        # self.temp_battery.setText((str(round(result[1]["battery"], 1)) + " F"))
         # Update Switches
         for label in result[3]:
             if (result[3][label] != 0):
