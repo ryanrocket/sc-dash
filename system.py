@@ -66,7 +66,8 @@ __globals__ = {
         },
         "serial": None,
         "gps": None,
-        "gpsOutput": None
+        "gpsOutput": None,
+        "gpsLast": None
     },
     "start_time": dt.now()
 }
@@ -108,7 +109,6 @@ def init():
     if(len(tempsense_devices) < 2):
         log("error", "Insufficient number of temperature sensors found (<2)!")
         # return [False, "Insufficient number of temperature sensors found (<2)!"]
-        print("NONE")
     
     # Ardiuno Sensors
     if (not os.path.exists('/dev/ttyACM0')):
@@ -244,6 +244,17 @@ def sanatize_arduino(raw):
     }
     return state
 
-
+def sanatize_gps(raw):
+    array = raw.split(",")
+    sentence = array[0]    
+    if sentence == "$GPRMC":
+        # Important Metrics
+        None
+    elif sentence == "$GPGSV":
+        # GPS Behavior
+        None
+    else:
+        None
+    
 # Main
 init()
