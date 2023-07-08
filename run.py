@@ -15,6 +15,8 @@ __state__ = {
     "tel_stat": False
 }
 
+buffer = []
+
 class FastUpdate(QtCore.QObject):
 
     finished = QtCore.pyqtSignal(object)
@@ -28,8 +30,11 @@ class FastUpdate(QtCore.QObject):
     @QtCore.pyqtSlot()
     def run(self):
         # Fast Update Execution print(args, kwargs)
-        data = self.fn(*self.args, **self.kwargs)
-        self.finished.emit(data)
+        try:
+            data = self.fn(*self.args, **self.kwargs)
+            self.finished.emit(data)
+        except:
+            system.log("error", "FastThread internal function exceution error!")
 
 class SlowUpdate(QtCore.QRunnable):
 
@@ -44,8 +49,11 @@ class SlowUpdate(QtCore.QRunnable):
     @QtCore.pyqtSlot()
     def run(self):
         # Slow Update Execution print(args, kwargs)
-        data = self.fn(*self.args, **self.kwargs)
-        self.finished.emit(data)
+        try:
+            data = self.fn(*self.args, **self.kwargs)
+            self.finished.emit(data)
+        except:
+            system.log("error", "SlowThread internal function exceution error!")
 '''
 class GPSUpdate(QtCore.QObject):
 
@@ -228,6 +236,12 @@ class MainWindow(QtWidgets.QMainWindow):
         elif (result[1][0] == "GGA"):
             # Sat Data
             __state__["sat_num"] = int(result[1][2])
+
+    def dataSmoothing(self, speed):
+        if len(buffer) == 3:
+            buffer.pop(0)
+        buffer.append(speed)
+        system.log("data", repr(buffer))
 
     def updateArduino(self):
         data = system.sanatize_arduino(system.read_arduino())
