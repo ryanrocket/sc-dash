@@ -36,7 +36,7 @@ class FastUpdate(QtCore.QObject):
             self.finished.emit(data)
         except Exception as e:
             system.log("error", "FastThread internal function exceution error!" + e)
-            self.error.emit("FastThread internal function exceution error! " + e)
+            self.error.emit("FastThread internal function exceution error! " + str(e))
 
 class SlowUpdate(QtCore.QRunnable):
 
