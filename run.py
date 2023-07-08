@@ -205,7 +205,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 gps = ["GGA", nmea.timestamp, nmea.num_sats]
                 return [raw, gps, nmea]
             else:
-                return [raw, [None], nmea]
+                return [raw, [type(nmea).__name__], nmea]
         except:
             system.log("error", "Failed to read NMEA data")
             return [raw, [None], None]
@@ -239,6 +239,9 @@ class MainWindow(QtWidgets.QMainWindow):
             elif (result[1][0] == "GGA"):
                 # Sat Data
                 __state__["sat_num"] = int(result[1][2])
+                system.log("data", "Satellites: " + __state__["sat_num"])
+            else:
+                system.log("warn", "MSG TYPE: " + result[1][0])
         except:
             system.log("error", "Failed to write GPS data; falling back on previous buffer state.")
 
