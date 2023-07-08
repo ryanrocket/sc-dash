@@ -79,11 +79,14 @@ class MainWindow(QtWidgets.QMainWindow):
         system.log("info", "SlowUpdate Worker connected to timerSlow Interval: 5000mS")
 
         # Start fast timers
+        '''
         timerFast = QtCore.QTimer(self)
         timerFast.setSingleShot(False)
         timerFast.timeout.connect(self.startFastWorker)
         timerFast.setInterval(499)
         timerFast.start()
+        '''
+        self.startFastWorker()
         system.log("info", "FastUpdate Worker connected to timerFast Interval: 500mS")
 
     @QtCore.pyqtSlot()
@@ -112,6 +115,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fastWorker.finished.connect(self.threadFast.quit)
         self.fastWorker.finished.connect(self.fastWorker.deleteLater)
         self.threadFast.finished.connect(self.threadFast.deleteLater)
+        self.threadFast.finished.connect(self.startFastWorker)
         # Start thread
         self.threadFast.start()
 
