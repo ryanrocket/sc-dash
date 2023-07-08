@@ -184,17 +184,20 @@ class MainWindow(QtWidgets.QMainWindow):
     def fastEventTrigger(self):
         # Update RTC & GPS Data
         raw = self.updateRTC()
-        nmea = system.read_gps()
-        if type(nmea).__name__ == "RMC":
-            gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd]
-            return [raw, gps]
-        elif type(nmea).__name__ == "VTG":
-            gps = ["VTG", nmea.spd_over_grnd_kts]
-            return [raw, gps]
-        elif type(nmea).__name__ == "GGA":
-            gps = ["GGA", nmea.timestamp, nmea.num_sats]
-            return [raw, gps]
-        else:
+        try:
+            nmea = system.read_gps()
+            if type(nmea).__name__ == "RMC":
+                gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd]
+                return [raw, gps]
+            elif type(nmea).__name__ == "VTG":
+                gps = ["VTG", nmea.spd_over_grnd_kts]
+                return [raw, gps]
+            elif type(nmea).__name__ == "GGA":
+                gps = ["GGA", nmea.timestamp, nmea.num_sats]
+                return [raw, gps]
+            else:
+                return [raw, [None]]
+        except:
             return [raw, [None]]
     
     @QtCore.pyqtSlot(object)
