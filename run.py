@@ -195,7 +195,7 @@ class MainWindow(QtWidgets.QMainWindow):
             gps = ["GGA", nmea.timestamp, nmea.num_sats]
             return [raw, gps]
         else:
-            return [raw, None]
+            return [raw, [None]]
     
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
