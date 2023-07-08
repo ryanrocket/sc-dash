@@ -217,27 +217,30 @@ class MainWindow(QtWidgets.QMainWindow):
         self.time.setText(result[0][0])
         self.runTime.setText(result[0][1])
         # Treat GPS Data
-        if (result[1][0] == "RMC"):
-            # Speed Data
-            system.log("data", repr(result[2]))
-            speed = int(float(result[1][2]) * 1.151)
-            if speed < 10:
-                speed = "0" + str(speed)
-                self.speed.setText(speed)
-            else:
-                self.speed.setText(str(speed))
-        elif (result[1][0] == "VTG"):
-            # Speed Data
-            system.log("data", repr(result[2]))
-            speed = int(float(result[1][1]) * 1.151)
-            if speed < 10:
-                speed = "0" + str(speed)
-                self.speed.setText(speed)
-            else:
-                self.speed.setText(str(speed))
-        elif (result[1][0] == "GGA"):
-            # Sat Data
-            __state__["sat_num"] = int(result[1][2])
+        try: 
+            if (result[1][0] == "RMC"):
+                # Speed Data
+                system.log("data", repr(result[2]))
+                speed = int(float(result[1][2]) * 1.151)
+                if speed < 10:
+                    speed = "0" + str(speed)
+                    self.speed.setText(speed)
+                else:
+                    self.speed.setText(str(speed))
+            elif (result[1][0] == "VTG"):
+                # Speed Data
+                system.log("data", repr(result[2]))
+                speed = int(float(result[1][1]) * 1.151)
+                if speed < 10:
+                    speed = "0" + str(speed)
+                    self.speed.setText(speed)
+                else:
+                    self.speed.setText(str(speed))
+            elif (result[1][0] == "GGA"):
+                # Sat Data
+                __state__["sat_num"] = int(result[1][2])\
+        except:
+            system.log("error", "Failed to write GPS data; falling back on previous buffer state.")
 
     def dataSmoothing(self, speed):
         if len(buffer) == 3:
