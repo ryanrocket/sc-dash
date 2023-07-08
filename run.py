@@ -222,7 +222,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.speed.setText(speed)
             else:
                 self.speed.setText(str(speed))
-        else:
+        elif (result[1][0] == "GGA"):
             # Sat Data
             __state__["sat_num"] = int(result[1][2])
 
