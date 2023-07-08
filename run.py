@@ -197,18 +197,18 @@ class MainWindow(QtWidgets.QMainWindow):
             nmea = system.read_gps()
             if type(nmea).__name__ == "RMC":
                 gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd]
-                return [raw, gps]
+                return [raw, gps, nmea]
             elif type(nmea).__name__ == "VTG":
                 gps = ["VTG", nmea.spd_over_grnd_kts]
-                return [raw, gps]
+                return [raw, gps, nmea]
             elif type(nmea).__name__ == "GGA":
                 gps = ["GGA", nmea.timestamp, nmea.num_sats]
-                return [raw, gps]
+                return [raw, gps, nmea]
             else:
-                return [raw, [None]]
+                return [raw, [None], nmea]
         except:
             system.log("error", "Failed to read NMEA data")
-            return [raw, [None]]
+            return [raw, [None], None]
     
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
@@ -220,6 +220,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if (result[1][0] == "RMC"):
             # Speed Data
             speed = int(float(result[1][2]) * 1.151)
+            print(repr(result[2]))
             if speed < 10:
                 speed = "0" + str(speed)
                 self.speed.setText(speed)
@@ -228,6 +229,7 @@ class MainWindow(QtWidgets.QMainWindow):
         elif (result[1][0] == "VTG"):
             # Speed Data
             speed = int(float(result[1][1]) * 1.151)
+            print(repr(result[2]))
             if speed < 10:
                 speed = "0" + str(speed)
                 self.speed.setText(speed)
