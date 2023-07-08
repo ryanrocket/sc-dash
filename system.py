@@ -135,6 +135,7 @@ def init():
             stopbits = serial.STOPBITS_ONE,
             bytesize = serial.EIGHTBITS,
             timeout = 1)
+        __globals__["sensors"]["gps"].reset_input_buffer()
         __globals__["sensors"]["gpsOutput"] = io.TextIOWrapper(io.BufferedRWPair(__globals__["sensors"]["gps"], __globals__["sensors"]["gps"]))
 
     # Finish
