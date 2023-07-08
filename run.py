@@ -211,7 +211,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Treat GPS Data
         if (result[1][0] == "RMC"):
             # Speed Data
-            speed = int(result[1][2])
+            speed = int(float(result[1][2]) * 1.151)
             if speed < 10:
                 speed = "0" + str(speed)
                 self.speed.setText(speed)
@@ -219,7 +219,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.speed.setText(str(speed))
         elif (result[1][0] == "VTG"):
             # Speed Data
-            speed = int(result[1][1])
+            speed = int(float(result[1][1]) * 1.151)
             if speed < 10:
                 speed = "0" + str(speed)
                 self.speed.setText(speed)
