@@ -275,7 +275,7 @@ class MainWindow(QtWidgets.QMainWindow):
         runTime = '{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds))
         return [label_time, runTime]
     
-    @QtCore.pyqtSlot(object)
+    @QtCore.pyqtSlot(str)
     def stopError(self, error):
         system.log("fatal", error)
         exit()
