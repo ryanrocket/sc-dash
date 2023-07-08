@@ -238,7 +238,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.speed.setText(str(speed))
             elif (result[1][0] == "GGA"):
                 # Sat Data
-                __state__["sat_num"] = int(result[1][2])\
+                __state__["sat_num"] = int(result[1][2])
         except:
             system.log("error", "Failed to write GPS data; falling back on previous buffer state.")
 
