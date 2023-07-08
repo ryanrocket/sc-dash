@@ -193,6 +193,7 @@ class MainWindow(QtWidgets.QMainWindow):
     
     def fastEventTrigger(self):
         # Update RTC & GPS Data
+        system.log("memory", str(self.getCurrentMemoryUsage()) + " kB")
         system.log("info", "Starting Fast Update Event")
         raw = self.updateRTC()
         try:
@@ -279,6 +280,14 @@ class MainWindow(QtWidgets.QMainWindow):
     def stopError(self, error):
         system.log("fatal", error)
         exit()
+
+    def getCurrentMemoryUsage(self):
+        ''' Memory usage in kB '''
+
+        with open('/proc/self/status') as f:
+            memusage = f.read().split('VmRSS:')[1].split('\n')[0][:-3]
+
+        return int(memusage.strip())
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
