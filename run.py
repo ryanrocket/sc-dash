@@ -20,6 +20,7 @@ buffer = []
 class FastUpdate(QtCore.QObject):
 
     finished = QtCore.pyqtSignal(object)
+    error = QtCore.pyqtSignal(str)
 
     def __init__(self, fn, *args, **kwargs):
         super(FastUpdate, self).__init__()
@@ -33,8 +34,9 @@ class FastUpdate(QtCore.QObject):
         try:
             data = self.fn(*self.args, **self.kwargs)
             self.finished.emit(data)
-        except:
-            system.log("error", "FastThread internal function exceution error!")
+        except Exception as e:
+            system.log("error", "FastThread internal function exceution error!" + e)
+            self.error.emit("FastThread internal function exceution error! " + e)
 
 class SlowUpdate(QtCore.QRunnable):
 
@@ -124,6 +126,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fastWorker.finished.connect(self.fastWorker.deleteLater)
         self.threadFast.finished.connect(self.threadFast.deleteLater)
         self.threadFast.finished.connect(self.startFastWorker)
+        self.fastWorker.error.connect(self.stopError)
         # Start thread
         self.threadFast.start()
 
@@ -271,6 +274,11 @@ class MainWindow(QtWidgets.QMainWindow):
         minutes, seconds = divmod(remainder, 60)
         runTime = '{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds))
         return [label_time, runTime]
+    
+    @QtCore.pyqtSlot(object)
+    def stopError(self, error):
+        system.log("fatal", error)
+        exit()
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
