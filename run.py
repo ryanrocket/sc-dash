@@ -190,10 +190,10 @@ class MainWindow(QtWidgets.QMainWindow):
     
     def fastEventTrigger(self):
         # Update RTC & GPS Data
-        # system.log("info", "Starting Fast Update Event")
+        system.log("info", "Starting Fast Update Event")
         raw = self.updateRTC()
         try:
-            # system.log("info", "Trying to read NMEA data")
+            system.log("info", "Trying to read NMEA data")
             nmea = system.read_gps()
             if type(nmea).__name__ == "RMC":
                 gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd]
@@ -212,7 +212,7 @@ class MainWindow(QtWidgets.QMainWindow):
     
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
-        # system.log("info", "Running Display Updaters!")
+        system.log("info", "Running Display Updaters!")
         # Update Times
         self.time.setText(result[0][0])
         self.runTime.setText(result[0][1])
