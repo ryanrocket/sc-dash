@@ -5,7 +5,7 @@
 ###########################################################
 
 # Packages
-import sys, time, glob, serial, os, pprint, io
+import sys, time, glob, serial, os, pprint, io, pynmea2
 from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 from gpiozero import Buzzer
@@ -66,8 +66,7 @@ __globals__ = {
         },
         "serial": None,
         "gps": None,
-        "gpsOutput": None,
-        "gpsLast": None
+        "gpsOutput": None
     },
     "start_time": dt.now()
 }
@@ -193,7 +192,7 @@ def read_arduino():
 
 def read_gps():
     line = __globals__["sensors"]["gpsOutput"].readline()
-    log("info", line)
+    return pynmea2.parse(line)
 
 def alarm(state):
     if state:
@@ -243,18 +242,6 @@ def sanatize_arduino(raw):
         "valid": raw[1]
     }
     return state
-
-def sanatize_gps(raw):
-    array = raw.split(",")
-    sentence = array[0]    
-    if sentence == "$GPRMC":
-        # Important Metrics
-        None
-    elif sentence == "$GPGSV":
-        # GPS Behavior
-        None
-    else:
-        None
     
 # Main
 init()

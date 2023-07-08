@@ -3,13 +3,16 @@
 import sys
 from datetime import datetime as dt
 from PyQt5 import QtWidgets, uic, QtCore
+from decimal import *
 
 import images
 
 import system
 
 __state__ = {
-    "data_visible": True
+    "data_visible": True,
+    "sat_num": 0,
+    "tel_stat": False
 }
 
 class FastUpdate(QtCore.QObject):
@@ -43,6 +46,20 @@ class SlowUpdate(QtCore.QRunnable):
         # Slow Update Execution print(args, kwargs)
         data = self.fn(*self.args, **self.kwargs)
         self.finished.emit(data)
+'''
+class GPSUpdate(QtCore.QObject):
+
+    write = QtCore.pyqtSignal(object)
+
+    def __init__(self, *args, **kwargs):
+        super(GPSUpdate, self).__init__()
+        self.args = args
+        self.kwargs = kwargs
+
+    @QtCore.pyqtSlot()
+    def run(self):
+        # Run continuous GPS unit readings
+'''
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -161,14 +178,46 @@ class MainWindow(QtWidgets.QMainWindow):
             system.alarm(False)
     
     def fastEventTrigger(self):
-        # Update RTC
+        # Update RTC & GPS Data
         raw = self.updateRTC()
-        return raw
+        nmea = system.read_gps()
+        if type(nmea).__name__ == "RMC":
+            gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd]
+            return [raw, gps]
+        elif type(nmea).__name__ == "VTG":
+            gps = ["VTG", nmea.spd_over_grnd_kts]
+            return [raw, gps]
+        elif type(nmea).__name__ == "GGA":
+            gps = ["GGA", nmea.timestamp, nmea.num_sats]
+            return [raw, gps]
+        else:
+            return [raw, None]
     
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
-        self.time.setText(result[0])
-        self.runTime.setText(result[1])
+        # Update Times
+        self.time.setText(result[0][0])
+        self.runTime.setText(result[0][1])
+        # Treat GPS Data
+        if (result[1][0] == "RMC"):
+            # Speed Data
+            speed = int(result[1][2])
+            if speed < 10:
+                speed = "0" + str(speed)
+                self.speed.setText(speed)
+            else:
+                self.speed.setText(str(speed))
+        elif (result[1][0] == "VTG"):
+            # Speed Data
+            speed = int(result[1][1])
+            if speed < 10:
+                speed = "0" + str(speed)
+                self.speed.setText(speed)
+            else:
+                self.speed.setText(str(speed))
+        else:
+            # Sat Data
+            __state__["sat_num"] = int(result[1][2])
 
     def updateArduino(self):
         data = system.sanatize_arduino(system.read_arduino())
