@@ -143,7 +143,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # dataTemps = self.updateTemps()
         dataArduino = self.updateArduino()
         dataSwitch = self.updateSwitches()
-        system.read_gps()
         return [dataStatus, None, dataArduino, dataSwitch]
 
     @QtCore.pyqtSlot(object)
