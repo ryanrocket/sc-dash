@@ -9,16 +9,20 @@ import images
 
 import system
 
+# Global Variables
 __state__ = {
     "data_visible": True,
     "sat_num": 0,
     "tel_stat": False
 }
 
+# Buffer for smoothing input streams (probably just use kalman filter)
 buffer = []
 
+# Worker for 'Fast' Thread: ~500mS Interval (but just runs itself upon finishing, see below)
 class FastUpdate(QtCore.QObject):
 
+    # Signals
     finished = QtCore.pyqtSignal(object)
     error = QtCore.pyqtSignal(str)
 
@@ -35,9 +39,11 @@ class FastUpdate(QtCore.QObject):
             data = self.fn(*self.args, **self.kwargs)
             self.finished.emit(data)
         except Exception as e:
+            # uh oh
             system.log("error", "FastThread internal function exceution error!" + e)
             self.error.emit("FastThread internal function exceution error! " + str(e))
 
+# Same but for the slow-updating functions: ~5S Interval
 class SlowUpdate(QtCore.QRunnable):
 
     finished = QtCore.pyqtSignal(object)
@@ -56,34 +62,21 @@ class SlowUpdate(QtCore.QRunnable):
             self.finished.emit(data)
         except:
             system.log("error", "SlowThread internal function exceution error!")
-'''
-class GPSUpdate(QtCore.QObject):
 
-    write = QtCore.pyqtSignal(object)
-
-    def __init__(self, *args, **kwargs):
-        super(GPSUpdate, self).__init__()
-        self.args = args
-        self.kwargs = kwargs
-
-    @QtCore.pyqtSlot()
-    def run(self):
-        # Run continuous GPS unit readings
-'''
-
+# Main Qt Application
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         # QtWidgets.QMainWindow.__init__(self, parent)
         super(MainWindow, self).__init__(parent)
+        # Load UI from QtDesigner XML file (qtdesigner > coding an interface)
         uic.loadUi("./v01pre.ui", self)
         self.reset_but.clicked.connect(self.toggle_data_visibility)
-        self.threadpool = QtCore.QThreadPool()
-        system.log("info", "Multithreading with maximum of: %d Threads" % self.threadpool.maxThreadCount())
 
         # Start slow timer
         timerSlow = QtCore.QTimer(self)
         timerSlow.setSingleShot(False)
         timerSlow.timeout.connect(self.startSlowWorker)
+        # Saw somewhere that using prime numbers for intervals was better???
         timerSlow.setInterval(4999)
         timerSlow.start() 
         system.log("info", "SlowUpdate Worker connected to timerSlow Interval: 5000mS")
@@ -96,9 +89,11 @@ class MainWindow(QtWidgets.QMainWindow):
         timerFast.setInterval(499)
         timerFast.start()
         '''
+        # Explained below
         self.startFastWorker()
         system.log("info", "FastUpdate Worker connected to timerFast Interval: 500mS")
 
+    # Show/Hide data aquisition on the dashboard
     @QtCore.pyqtSlot()
     def toggle_data_visibility(self):
         print("Toggling Data Group")
@@ -110,10 +105,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.data_div.show()
         __state__["data_visible"] = not __state__["data_visible"]
 
+    # Start the Fast Thread
     @QtCore.pyqtSlot()
     def startFastWorker(self):
-        # Create Multithreaded Workers
-        # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
         # Create Instantiations
         self.threadFast = QtCore.QThread()
         self.fastWorker = FastUpdate(self.fastEventTrigger)
@@ -125,15 +119,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fastWorker.finished.connect(self.threadFast.quit)
         self.fastWorker.finished.connect(self.fastWorker.deleteLater)
         self.threadFast.finished.connect(self.threadFast.deleteLater)
+        # Re-run thread upon completition (good idea or bad????)
         self.threadFast.finished.connect(self.startFastWorker)
         self.fastWorker.error.connect(self.stopError)
         # Start thread
         self.threadFast.start()
 
+    # Start the Slow Thread
     @QtCore.pyqtSlot()
     def startSlowWorker(self):
-        # Create Multithreaded Workers
-        # system.log("info", "Using " + str(self.threadpool.activeThreadCount()) + " (+1) of " + str(self.threadpool.maxThreadCount()) + " Available Threads")
         # Create Instantiations
         self.threadSlow = QtCore.QThread()
         self.slowWorker = FastUpdate(self.slowEventTrigger)
@@ -148,14 +142,17 @@ class MainWindow(QtWidgets.QMainWindow):
         # Start thread
         self.threadSlow.start()
 
+    # Function that gets run by the Slow Thread
     def slowEventTrigger(self):
-        # Update Status
+        # Read the state of IO pins on the RPI
         dataStatus = system.__state__
         # dataTemps = self.updateTemps()
         dataArduino = self.updateArduino()
         dataSwitch = self.updateSwitches()
+        # Pass to the slot function
         return [dataStatus, None, dataArduino, dataSwitch]
 
+    # Signal that gets run by Slow Thread to update the display
     @QtCore.pyqtSlot(object)
     def slowEventUpdate(self, result):
         # Update Arduino
@@ -191,11 +188,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
     
+    # Function that gets run by the Fast Thread
     def fastEventTrigger(self):
-        # Update RTC & GPS Data
+        # temporary solution to monitor memory leaks (poor mans fix)
         system.log("memory", str(self.getCurrentMemoryUsage()) + " kB")
         system.log("info", "Starting Fast Update Event")
+        # Gets RTC data
         raw = self.updateRTC()
+        # Encapsulating this all in a try/catch b/c sometimes it reads jargled data
+        # If fails, the previous data persists in the display
         try:
             system.log("info", "Trying to read NMEA data")
             nmea = system.read_gps()
@@ -214,13 +215,16 @@ class MainWindow(QtWidgets.QMainWindow):
             system.log("error", "Failed to read NMEA data")
             return [raw, [None], None]
     
+    # Signal that gets run by Fast Thread to update the display
     @QtCore.pyqtSlot(object)
     def fastEventUpdate(self, result):
+        # confirm that this shit actually runs
         system.log("info", "Running Display Updaters!")
         # Update Times
         self.time.setText(result[0][0])
         self.runTime.setText(result[0][1])
         # Treat GPS Data
+        # another poor mans way to persist older data when new data is bad
         try: 
             if (result[1][0] == "RMC"):
                 # Speed Data
@@ -249,12 +253,14 @@ class MainWindow(QtWidgets.QMainWindow):
         except:
             system.log("error", "Failed to write GPS data; falling back on previous buffer state.")
 
+    # Will (eventually) get implemented to filter out noisy GPS readings
     def dataSmoothing(self, speed):
         if len(buffer) == 3:
             buffer.pop(0)
         buffer.append(speed)
         system.log("data", repr(buffer))
 
+    # All the functions that collect data from the system.py implementation (IO interface)
     def updateArduino(self):
         data = system.sanatize_arduino(system.read_arduino())
         return data
@@ -276,11 +282,13 @@ class MainWindow(QtWidgets.QMainWindow):
         runTime = '{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds))
         return [label_time, runTime]
     
+    # Fatal error exiting for threads since you cant log outside of main thread
     @QtCore.pyqtSlot(str)
     def stopError(self, error):
         system.log("fatal", error)
         exit()
 
+    # aforementioned memory monitoring 
     def getCurrentMemoryUsage(self):
         ''' Memory usage in kB '''
 
@@ -289,6 +297,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         return int(memusage.strip())
 
+# run and pray
 def main():
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
