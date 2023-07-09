@@ -2,4 +2,4 @@
 
 some info re: integration w/ hardware and theory of operation: https://docs.google.com/document/d/1cGimtCK8eluC2UDLXcvhuKnaBOUmhU2zC9_unpOaDNo/edit?usp=sharing 
 
-main execution file is `run.py` and relies on `system.py` for hardware integration
+main execution file is `run.py` and relies on `system.py` for hardware integration. The rest it Qt-related stuff and code for the arduino interface 
