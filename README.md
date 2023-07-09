@@ -1,5 +1,7 @@
 # Qt-py Dashboard for Challenger 2023
 
+[[Click to see current issue](https://github.com/ryanrocket/sc-dash/issues/2)]
+
 Designed to be run on a Raspberry Pi
 
 Some info re: integration w/ hardware and theory of operation: https://docs.google.com/document/d/1cGimtCK8eluC2UDLXcvhuKnaBOUmhU2zC9_unpOaDNo/edit?usp=sharing 
