@@ -197,8 +197,10 @@ def read_arduino():
 
 def read_gps():
     # read and parse the latest serial output in the buffer
-    line = __globals__["sensors"]["gpsOutput"].readline()
-    return pynmea2.parse(line)
+    #line = __globals__["sensors"]["gpsOutput"].readline()
+    # return pynmea2.parse(line)
+    # Temporary fix to see if GPS-reading is causing the freezing
+    return False
 
 # low-voltage alert for driver
 def alarm(state):
