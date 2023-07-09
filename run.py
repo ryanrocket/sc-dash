@@ -13,7 +13,8 @@ import system
 __state__ = {
     "data_visible": True,
     "sat_num": 0,
-    "tel_stat": False
+    "tel_stat": False,
+    "gps_error": None
 }
 
 # Buffer for smoothing input streams (probably just use kalman filter)
@@ -188,12 +189,16 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
-        if(int(__state__["sat_num"]) < 1):
+        if(int(__state__["sat_num"]) < 1 and __state__["gps_error"] == None):
             self.tel_status.setText("NO SIGNAL")
             self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: red;")
+        elif(__state__["gps_error"] != None):
+            self.tel_status.setText("GPS ERROR")
+            self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
+                                            color: red;")
         else:
-            self.tel_status.setText("GOOD: " + str(__state__["sat_num"]) + "-SAT")
+            self.tel_status.setText("OK: " + str(__state__["sat_num"]) + "-SAT")
             self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: green;")
     
