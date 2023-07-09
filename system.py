@@ -10,6 +10,8 @@ from datetime import datetime as dt
 from w1thermsensor import W1ThermSensor as therm
 from gpiozero import Buzzer
 import RPi.GPIO as GPIO
+
+# IO initialization
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT)
@@ -20,8 +22,10 @@ GPIO.setup(20, GPIO.IN)
 GPIO.setup(21, GPIO.IN)
 
 # Yes this is sphegatt code i dont care
+# Also this will error out if *not* run on an RPI w/ correct packages installed
 
 print("SOLAR CAR DASHBOARD 2023")
+
 # Globals
 def log(type, mes):
     print('[' + type.upper() + '] ' + mes)
@@ -96,7 +100,7 @@ __state__ = {
 
 
 
-# Initialization
+# Initialization process
 def init():
     log("info", "Starting initialization process...")
 
@@ -192,9 +196,11 @@ def read_arduino():
     return [rawDataMatrix, status]
 
 def read_gps():
+    # read and parse the latest serial output in the buffer
     line = __globals__["sensors"]["gpsOutput"].readline()
     return pynmea2.parse(line)
 
+# low-voltage alert for driver
 def alarm(state):
     if state:
         __globals__["sensors"]["buzzer"].beep()
@@ -203,7 +209,7 @@ def alarm(state):
 
 
 
-# Data Sanitization
+# Data "Sanitization"
 def sanitize_temperatures(temps):
     state = {
         "cabOvh": (temps["cabin"] > __globals__["sensors"]["temp"]["domains"]["cabin"]),
