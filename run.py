@@ -1,6 +1,6 @@
 # Ryan Wans 2023 for South River Solar Hawks C2
 
-import sys
+import sys, time
 from datetime import datetime as dt
 from PyQt5 import QtWidgets, uic, QtCore
 from decimal import *
@@ -213,6 +213,7 @@ class MainWindow(QtWidgets.QMainWindow):
         raw = self.updateRTC()
         # Encapsulating this all in a try/catch b/c sometimes it reads jargled data
         # If fails, the previous data persists in the display
+        time.sleep(0.5)
         try:
             system.log("info", "Trying to read NMEA data")
             nmea = system.read_gps()
