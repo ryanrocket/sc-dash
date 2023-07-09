@@ -188,13 +188,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
-        if(__state__["sat_num"] > 0):
+        if(int(__state__["sat_num"]) > 0):
             self.tel_status.setText("NO SIGNAL")
-            self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
+            self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: red;")
         else:
             self.tel_status.setText("GOOD: " + str(__state__["sat_num"]) + "-SAT")
-            self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
+            self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: green;")
     
     # Function that gets run by the Fast Thread
