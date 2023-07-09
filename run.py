@@ -146,7 +146,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def slowEventTrigger(self):
         # Read the state of IO pins on the RPI
         dataStatus = system.__state__
-        # dataTemps = self.updateTemps()
+        # Read sensors
+        # dataTemps = self.updateTemps()          # commented out: errors out when no temp sensors plugged in
         dataArduino = self.updateArduino()
         dataSwitch = self.updateSwitches()
         # Pass to the slot function
@@ -187,12 +188,21 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
+        if(__state__["sat_num"] > 0):
+            self.tel_status.setText("NO SIGNAL")
+            self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
+                                            color: red;")
+        else:
+            self.tel_status.setText("GOOD: " + str(__state__["sat_num"]) + "-SAT")
+            self.sys_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
+                                            color: green;")
     
     # Function that gets run by the Fast Thread
     def fastEventTrigger(self):
         # temporary solution to monitor memory leaks (poor mans fix)
         system.log("memory", str(self.getCurrentMemoryUsage()) + " kB")
         system.log("info", "Starting Fast Update Event")
+        # confirmed no memory leak (yay python) but leaving in for now anyways
         # Gets RTC data
         raw = self.updateRTC()
         # Encapsulating this all in a try/catch b/c sometimes it reads jargled data
