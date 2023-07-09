@@ -192,7 +192,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if(int(__state__["sat_num"]) < 1 and not __state__["gps_error"]):
             self.tel_status.setText("NO SIGNAL")
             self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
-                                            color: red;")
+                                            color: yellow;")
         elif(__state__["gps_error"]):
             self.tel_status.setText("GPS ERROR")
             self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
