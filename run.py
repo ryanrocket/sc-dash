@@ -14,7 +14,7 @@ __state__ = {
     "data_visible": True,
     "sat_num": 0,
     "tel_stat": False,
-    "gps_error": None
+    "gps_error": False
 }
 
 # Buffer for smoothing input streams (probably just use kalman filter)
@@ -189,11 +189,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.messageBut.setText("NO SYSTEM MESSAGES")
             self.messageBut.setStyleSheet(self.messageBut.styleSheet().replace("color: rgb(255, 120, 0);", "color: rgb(154, 153, 150);"))
             system.alarm(False)
-        if(int(__state__["sat_num"]) < 1 and __state__["gps_error"] == None):
+        if(int(__state__["sat_num"]) < 1 and not __state__["gps_error"]):
             self.tel_status.setText("NO SIGNAL")
             self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: red;")
-        elif(__state__["gps_error"] != None):
+        elif(__state__["gps_error"]):
             self.tel_status.setText("GPS ERROR")
             self.tel_status.setStyleSheet("font: 600 30pt \"Open Sans\"; \
                                             color: red;")
@@ -216,7 +216,7 @@ class MainWindow(QtWidgets.QMainWindow):
             system.log("info", "Trying to read NMEA data")
             nmea = system.read_gps()
             if type(nmea).__name__ == "RMC":
-                gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd]
+                gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd, nmea.status]
                 return [raw, gps, nmea]
             elif type(nmea).__name__ == "VTG":
                 gps = ["VTG", nmea.spd_over_grnd_kts]
@@ -250,6 +250,10 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.speed.setText(speed)
                 else:
                     self.speed.setText(str(speed))
+                if result[1][3] == "V":
+                    __state__["gps_error"] = True
+                else:
+                    __state__["gps_error"] = False
             elif (result[1][0] == "VTG"):
                 # Speed Data
                 system.log("data", repr(result[2]))
