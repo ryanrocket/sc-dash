@@ -240,6 +240,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.runTime.setText(result[0][1])
         # Treat GPS Data
         # another poor mans way to persist older data when new data is bad
+        print(result[2])
         try: 
             if (result[1][0] == "RMC"):
                 # Speed Data
