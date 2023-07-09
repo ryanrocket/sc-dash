@@ -141,7 +141,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slowWorker.finished.connect(self.slowWorker.deleteLater)
         self.threadSlow.finished.connect(self.threadSlow.deleteLater)
         # Start thread
-        # self.threadSlow.start() Temporary disable to see if this mf is the culprit
+        # NOTE: I've tried temporarily disabling this thread to see if the issue persists; it does
+        self.threadSlow.start() 
 
     # Function that gets run by the Slow Thread
     def slowEventTrigger(self):
@@ -240,7 +241,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.runTime.setText(result[0][1])
         # Treat GPS Data
         # another poor mans way to persist older data when new data is bad
-        print(result[2])
+        print(result[2]) # temporary debug to see if invalid nmea messages fault it
         try: 
             if (result[1][0] == "RMC"):
                 # Speed Data
