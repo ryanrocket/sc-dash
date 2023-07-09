@@ -141,7 +141,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slowWorker.finished.connect(self.slowWorker.deleteLater)
         self.threadSlow.finished.connect(self.threadSlow.deleteLater)
         # Start thread
-        self.threadSlow.start()
+        # self.threadSlow.start() Temporary disable to see if this mf is the culprit
 
     # Function that gets run by the Slow Thread
     def slowEventTrigger(self):
