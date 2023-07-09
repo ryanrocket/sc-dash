@@ -16,4 +16,6 @@ while True:
     line = sio.readline()
     msg = pynmea2.parse(line)
     print(repr(msg))
+    if (type(msg).__name__ == "RMC"):
+        print(msg.status)
     time.sleep(0.5)
