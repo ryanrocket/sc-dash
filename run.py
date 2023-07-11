@@ -160,6 +160,11 @@ class MainWindow(QtWidgets.QMainWindow):
     def slowEventUpdate(self, result):
         # Update Arduino
         self.dataBatteryVolt.setText(str(result[2]["motorV"]) + " V")
+        if (result[2]["motorV"] < 3.1):
+            # Alarm
+            system.alarm(True)
+        else: 
+            system.alarm(False)
         self.dataSolarVolt.setText(str(result[2]["solarV"]) + " V")
         self.dataBatteryDraw.setText(str(result[2]["motorI"]) + " A")
         self.dataSolarDraw.setText(str(result[2]["solarI"]) + " A")
