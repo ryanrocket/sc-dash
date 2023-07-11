@@ -206,8 +206,8 @@ class MainWindow(QtWidgets.QMainWindow):
     # Function that gets run by the Fast Thread
     def fastEventTrigger(self):
         # temporary solution to monitor memory leaks (poor mans fix)
-        system.log("memory", str(self.getCurrentMemoryUsage()) + " kB")
-        system.log("info", "Starting Fast Update Event")
+        print("memory", str(self.getCurrentMemoryUsage()) + " kB")
+        print("info", "Starting Fast Update Event")
         # confirmed no memory leak (yay python) but leaving in for now anyways
         # Gets RTC data
         raw = self.updateRTC()
@@ -215,7 +215,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # If fails, the previous data persists in the display
         time.sleep(0.5)
         try:
-            system.log("info", "Trying to read NMEA data")
+            print("info", "Trying to read NMEA data")
             nmea = system.read_gps()
             if type(nmea).__name__ == "RMC":
                 gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd, nmea.status]
@@ -229,7 +229,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 return [raw, [type(nmea).__name__], nmea]
         except:
-            system.log("error", "Failed to read NMEA data")
+            print("error", "Failed to read NMEA data")
             return [raw, [None], None]
     
     # Signal that gets run by Fast Thread to update the display
