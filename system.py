@@ -125,7 +125,8 @@ def init():
         time.sleep(1)
         log("info", "Arduino status: " + __globals__["sensors"]["serial"].readline().decode('utf-8').rstrip())
 
-    # GPS Module
+    # GPS Module 
+    '''
     if (not os.path.exists('/dev/ttyAMA0')):
         log("error", "GPS module not connected.")
         return [False, "GPS module not connected."]
@@ -141,7 +142,7 @@ def init():
             timeout = 1)
         __globals__["sensors"]["gps"].reset_input_buffer()
         __globals__["sensors"]["gpsOutput"] = io.TextIOWrapper(io.BufferedRWPair(__globals__["sensors"]["gps"], __globals__["sensors"]["gps"]))
-
+    '''
     # Finish
     __state__["status"] = True
     return [True, ""]
@@ -197,10 +198,10 @@ def read_arduino():
 
 def read_gps():
     # read and parse the latest serial output in the buffer
-    line = __globals__["sensors"]["gpsOutput"].readline()
-    return pynmea2.parse(line)
+    # line = __globals__["sensors"]["gpsOutput"].readline()
+    # return pynmea2.parse(line)
     # Temporary fix to see if GPS-reading is causing the freezing
-    # return False
+    return False
 
 # low-voltage alert for driver
 def alarm(state):

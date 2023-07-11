@@ -1,6 +1,6 @@
 # Ryan Wans 2023 for South River Solar Hawks C2
 
-import sys, time
+import sys, time, pynmea2, serial, io, os
 from datetime import datetime as dt
 from PyQt5 import QtWidgets, uic, QtCore
 from decimal import *
@@ -14,8 +14,25 @@ __state__ = {
     "data_visible": True,
     "sat_num": 0,
     "tel_stat": False,
-    "gps_error": True
+    "gps_error": True,
+    "gps": None,
+    "gpsOutput": None
 }
+
+if (not os.path.exists('/dev/ttyAMA0')):
+        print("error", "GPS module not connected.")
+else:
+    print("info", "GPS module connected!")
+    time.sleep(1)
+    __state__["gps"] = serial.Serial(
+        port = '/dev/ttyAMA0',
+        baudrate = 9600,
+        parity = serial.PARITY_NONE,
+        stopbits = serial.STOPBITS_ONE,
+        bytesize = serial.EIGHTBITS,
+        timeout = 1)
+    __state__["gps"].reset_input_buffer()
+    __state__["gpsOutput"] = io.TextIOWrapper(io.BufferedRWPair(__state__["gps"], __state__["gps"]))
 
 # Buffer for smoothing input streams (probably just use kalman filter)
 buffer = []
@@ -221,7 +238,7 @@ class MainWindow(QtWidgets.QMainWindow):
         time.sleep(0.5)
         try:
             print("info", "Trying to read NMEA data")
-            nmea = system.read_gps()
+            nmea = pynmea2.parse(__state__["gpsOutput"].readline())
             if type(nmea).__name__ == "RMC":
                 gps = ["RMC", nmea.timestamp, nmea.spd_over_grnd, nmea.status]
                 return [raw, gps, nmea]
