@@ -140,7 +140,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # Re-run thread upon completition (good idea or bad????)
         self.threadFast.finished.connect(self.startFastWorker)
         self.fastWorker.error.connect(self.stopError)
-        # Start thread
+        # Start thread w/ delay maybe?
+        time.sleep(0.1)
         self.threadFast.start()
 
     # Start the Slow Thread
@@ -177,14 +178,14 @@ class MainWindow(QtWidgets.QMainWindow):
     def slowEventUpdate(self, result):
         # Update Arduino
         self.dataBatteryVolt.setText(str(result[2]["motorV"]) + " V")
-        if (float(result[2]["motorV"]) < 3.1):
+        if (float(result[2]["motorV"]) < 3.05):
             # Alarm
             system.alarm(True)
         else: 
             system.alarm(False)
-        self.dataSolarVolt.setText(str(result[2]["solarV"]) + " V")
-        self.dataBatteryDraw.setText(str(result[2]["motorI"]) + " A")
-        self.dataSolarDraw.setText(str(result[2]["solarI"]) + " A")
+        self.dataSolarVolt.setText(str(result[2]["solarV"]) + " V") # ACCSY VOLT
+        self.dataBatteryDraw.setText(str(float(result[2]["motorV"])*15) + " V")
+        self.dataSolarDraw.setText(str(result[2]["solarI"]) + " A") # MOTOR DRAW
         self.dataAccDraw.setText(str(result[2]["accsyI"]) + " A")
         # Update Temps
         # self.temp_internal.setText((str(round(result[1]["cabin"], 1)) + " F"))
